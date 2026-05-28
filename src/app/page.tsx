@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback, useSyncExternalStore } from 'react';
 import dynamic from 'next/dynamic';
 import IntroCrawl from '@/components/star-wars/intro-crawl';
 import Navbar from '@/components/star-wars/navbar';
@@ -10,16 +10,31 @@ import SagaExplorer from '@/components/star-wars/saga-explorer';
 
 const StarField = dynamic(() => import('@/components/star-wars/star-field'), { ssr: false });
 
-export default function Home() {
-  const hasSeenIntro = typeof window !== 'undefined' ? sessionStorage.getItem('sw-intro-seen') : null;
-  const [showIntro, setShowIntro] = useState(!hasSeenIntro);
-  const [introComplete, setIntroComplete] = useState(!!hasSeenIntro);
+// Use useSyncExternalStore to safely read sessionStorage without hydration mismatch.
+// On the server it returns null; on the client it returns the actual value.
+// React handles the transition correctly without hydration errors.
+function useHasSeenIntro() {
+  return useSyncExternalStore(
+    // subscribe — no-op since sessionStorage changes from same tab don't fire events
+    () => () => {},
+    // getSnapshot (client only)
+    () => sessionStorage.getItem('sw-intro-seen'),
+    // getServerSnapshot — always null on the server
+    () => null
+  );
+}
 
-  const handleIntroComplete = () => {
+export default function Home() {
+  const hasSeenIntro = useHasSeenIntro();
+  const [skipped, setSkipped] = useState(false);
+
+  const showIntro = !hasSeenIntro && !skipped;
+  const introComplete = !!hasSeenIntro || skipped;
+
+  const handleIntroComplete = useCallback(() => {
     sessionStorage.setItem('sw-intro-seen', 'true');
-    setShowIntro(false);
-    setIntroComplete(true);
-  };
+    setSkipped(true);
+  }, []);
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
