@@ -45,43 +45,47 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(0.07 0 0);
+  --background: oklch(0.07 0.01 270);
   --foreground: oklch(0.95 0.02 85);
-  --card: oklch(0.12 0.01 85);
+  --card: oklch(0.1 0.01 270);
   --card-foreground: oklch(0.95 0.02 85);
-  --popover: oklch(0.12 0.01 85);
+  --popover: oklch(0.1 0.01 270);
   --popover-foreground: oklch(0.95 0.02 85);
   --primary: oklch(0.85 0.18 90);
-  --primary-foreground: oklch(0.12 0.01 85);
-  --secondary: oklch(0.18 0.01 85);
+  --primary-foreground: oklch(0.1 0.01 270);
+  --secondary: oklch(0.15 0.01 270);
   --secondary-foreground: oklch(0.95 0.02 85);
-  --muted: oklch(0.18 0.01 85);
-  --muted-foreground: oklch(0.65 0.02 85);
-  --accent: oklch(0.18 0.01 85);
+  --muted: oklch(0.15 0.01 270);
+  --muted-foreground: oklch(0.6 0.02 85);
+  --accent: oklch(0.15 0.01 270);
   --accent-foreground: oklch(0.95 0.02 85);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 12%);
   --ring: oklch(0.85 0.18 90);
   --chart-1: oklch(0.85 0.18 90);
   --chart-2: oklch(0.7 0.22 25);
   --chart-3: oklch(0.65 0.18 160);
   --chart-4: oklch(0.8 0.15 300);
   --chart-5: oklch(0.75 0.2 50);
-  --sidebar: oklch(0.1 0.01 85);
+  --sidebar: oklch(0.1 0.01 270);
   --sidebar-foreground: oklch(0.95 0.02 85);
   --sidebar-primary: oklch(0.85 0.18 90);
-  --sidebar-primary-foreground: oklch(0.12 0.01 85);
-  --sidebar-accent: oklch(0.18 0.01 85);
+  --sidebar-primary-foreground: oklch(0.1 0.01 270);
+  --sidebar-accent: oklch(0.15 0.01 270);
   --sidebar-accent-foreground: oklch(0.95 0.02 85);
-  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-border: oklch(1 0 0 / 8%);
   --sidebar-ring: oklch(0.85 0.18 90);
-  --sw-yellow: #FFE81F;
+
   --sw-gold: #E5C100;
-  --sw-red: #FF2D2D;
   --sw-blue: #4BD5EE;
+  --sw-red: #FF2D2D;
+  --sw-orange: #FF8C00;
   --sw-green: #00D4AA;
-  --sw-orange: #FF6B35;
+  --sw-teal: #20B2AA;
+  --sw-white: #E0E0F0;
+  --sw-yellow: #FFE81F;
+  --sw-gray: #8B8B8B;
 }
 
 @layer base {
@@ -93,43 +97,32 @@
   }
 }
 
-/* Star Wars Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+/* ─── Custom Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #050510; }
+::-webkit-scrollbar-thumb { background: rgba(75,213,238,0.2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(75,213,238,0.4); }
+
+/* ─── Hyperspace Intro ─── */
+@keyframes hyperspace-streak {
+  0% { transform: translateZ(0) scale(1); opacity: 1; }
+  100% { transform: translateZ(800px) scale(80); opacity: 0; }
 }
 
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
+@keyframes hyperspace-flash {
+  0% { opacity: 0; }
+  30% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 232, 31, 0.3);
-  border-radius: 4px;
+@keyframes intro-fade {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 232, 31, 0.5);
-}
-
-/* Star Wars Crawl Animation */
 @keyframes crawl {
-  0% {
-    transform: rotateX(25deg) translateY(100vh);
-  }
-  100% {
-    transform: rotateX(25deg) translateY(-300vh);
-  }
-}
-
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  0% { transform: rotateX(25deg) translateY(100vh); }
+  100% { transform: rotateX(25deg) translateY(-300vh); }
 }
 
 @keyframes fadeIn {
@@ -137,194 +130,220 @@
   100% { opacity: 1; }
 }
 
-@keyframes fadeOut {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-@keyframes logoZoom {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(0.01);
-    opacity: 0;
-  }
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
-    text-shadow: 0 0 5px rgba(255, 232, 31, 0.5), 0 0 10px rgba(255, 232, 31, 0.3);
-  }
-  50% {
-    text-shadow: 0 0 15px rgba(255, 232, 31, 0.8), 0 0 30px rgba(255, 232, 31, 0.5), 0 0 45px rgba(255, 232, 31, 0.3);
-  }
+  0%, 100% { text-shadow: 0 0 8px var(--glow-color, rgba(255,232,31,0.4)), 0 0 16px var(--glow-color, rgba(255,232,31,0.2)); }
+  50% { text-shadow: 0 0 16px var(--glow-color, rgba(255,232,31,0.6)), 0 0 32px var(--glow-color, rgba(255,232,31,0.4)), 0 0 48px var(--glow-color, rgba(255,232,31,0.2)); }
 }
 
-@keyframes lightsaber-glow {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(75, 213, 238, 0.5), 0 0 10px rgba(75, 213, 238, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 10px rgba(75, 213, 238, 0.8), 0 0 20px rgba(75, 213, 238, 0.5), 0 0 40px rgba(75, 213, 238, 0.3);
-  }
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
 }
 
-@keyframes slideInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-60px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  50% { transform: translateY(-20px) translateX(10px); }
+  100% { transform: translateY(-40px) translateX(-5px); opacity: 0; }
 }
 
-@keyframes slideInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(60px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
+@keyframes nebula-drift {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+  33% { transform: translate(20px, -10px) scale(1.05); opacity: 0.4; }
+  66% { transform: translate(-10px, 15px) scale(0.95); opacity: 0.35; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
 }
 
-@keyframes twinkle {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 1; }
+@keyframes lightsaber-pulse {
+  0%, 100% { box-shadow: 0 0 4px var(--ls-color, rgba(75,213,238,0.4)), 0 0 8px var(--ls-color, rgba(75,213,238,0.2)); }
+  50% { box-shadow: 0 0 8px var(--ls-color, rgba(75,213,238,0.6)), 0 0 16px var(--ls-color, rgba(75,213,238,0.4)), 0 0 24px var(--ls-color, rgba(75,213,238,0.2)); }
 }
 
-@keyframes hyperspace {
-  0% {
-    transform: perspective(500px) translateZ(0);
-    opacity: 1;
-  }
-  100% {
-    transform: perspective(500px) translateZ(500px);
-    opacity: 0;
-  }
+@keyframes progress-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 
-.crawl-text {
-  animation: crawl 60s linear forwards;
-}
-
-.crawl-perspective {
-  perspective: 400px;
-  perspective-origin: 50% 100%;
-}
-
-.logo-zoom {
-  animation: logoZoom 6s ease-in forwards;
-}
-
-.pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-.lightsaber-glow {
-  animation: lightsaber-glow 2s ease-in-out infinite;
-}
-
-.fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.fade-in {
-  animation: fadeIn 1s ease-out forwards;
-}
-
-.slide-in-left {
-  animation: slideInLeft 0.8s ease-out forwards;
-}
-
-.slide-in-right {
-  animation: slideInRight 0.8s ease-out forwards;
-}
-
-/* Star field */
-.star-field {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Star Wars card hover effect */
-.sw-card-hover {
-  transition: all 0.3s ease;
+/* ─── Holographic Card ─── */
+.holo-card {
   position: relative;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
   overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.sw-card-hover::before {
+.holo-card::before {
   content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 232, 31, 0.05),
-    transparent
-  );
-  transition: left 0.5s ease;
+  background: linear-gradient(90deg, transparent, rgba(75,213,238,0.04), rgba(255,255,255,0.02), rgba(75,213,238,0.04), transparent);
+  transition: left 0.6s ease;
+  pointer-events: none;
 }
 
-.sw-card-hover:hover::before {
+.holo-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--era-color, rgba(75,213,238,0.3)), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.holo-card:hover {
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px var(--era-glow, rgba(75,213,238,0.1)), 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.holo-card:hover::before {
   left: 100%;
 }
 
-.sw-card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 20px rgba(255, 232, 31, 0.15), 0 10px 40px rgba(0, 0, 0, 0.5);
-  border-color: rgba(255, 232, 31, 0.3);
+.holo-card:hover::after {
+  opacity: 1;
 }
 
-/* Lightsaber divider */
-.lightsaber-divider {
+/* ─── Scan line overlay for holo effect ─── */
+.holo-scan {
   position: relative;
-  height: 3px;
+  overflow: hidden;
+}
+
+.holo-scan::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(180deg, transparent, rgba(75,213,238,0.03), transparent);
+  animation: scan-line 4s linear infinite;
+  pointer-events: none;
+}
+
+/* ─── Lightsaber Dividers ─── */
+.ls-divider {
+  height: 2px;
+  border-radius: 1px;
+  position: relative;
+}
+
+.ls-divider-blue {
   background: linear-gradient(90deg, transparent, #4BD5EE, transparent);
-  box-shadow: 0 0 10px rgba(75, 213, 238, 0.5), 0 0 20px rgba(75, 213, 238, 0.3);
-  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(75,213,238,0.4), 0 0 16px rgba(75,213,238,0.2);
 }
 
-.lightsaber-divider-red {
+.ls-divider-red {
   background: linear-gradient(90deg, transparent, #FF2D2D, transparent);
-  box-shadow: 0 0 10px rgba(255, 45, 45, 0.5), 0 0 20px rgba(255, 45, 45, 0.3);
+  box-shadow: 0 0 8px rgba(255,45,45,0.4), 0 0 16px rgba(255,45,45,0.2);
 }
 
-.lightsaber-divider-green {
+.ls-divider-gold {
+  background: linear-gradient(90deg, transparent, #E5C100, transparent);
+  box-shadow: 0 0 8px rgba(229,193,0,0.4), 0 0 16px rgba(229,193,0,0.2);
+}
+
+.ls-divider-orange {
+  background: linear-gradient(90deg, transparent, #FF8C00, transparent);
+  box-shadow: 0 0 8px rgba(255,140,0,0.4), 0 0 16px rgba(255,140,0,0.2);
+}
+
+.ls-divider-green {
   background: linear-gradient(90deg, transparent, #00D4AA, transparent);
-  box-shadow: 0 0 10px rgba(0, 212, 170, 0.5), 0 0 20px rgba(0, 212, 170, 0.3);
+  box-shadow: 0 0 8px rgba(0,212,170,0.4), 0 0 16px rgba(0,212,170,0.2);
 }
 
-.lightsaber-divider-yellow {
-  background: linear-gradient(90deg, transparent, #FFE81F, transparent);
-  box-shadow: 0 0 10px rgba(255, 232, 31, 0.5), 0 0 20px rgba(255, 232, 31, 0.3);
+.ls-divider-white {
+  background: linear-gradient(90deg, transparent, #E0E0F0, transparent);
+  box-shadow: 0 0 8px rgba(224,224,240,0.3), 0 0 16px rgba(224,224,240,0.15);
 }
 
-/* Timeline line glow */
-.timeline-glow {
-  background: linear-gradient(180deg, #FFE81F, #FF6B35, #FF2D2D, #4BD5EE, #00D4AA);
-  box-shadow: 0 0 8px rgba(255, 232, 31, 0.3);
+/* ─── Timeline Glow Path ─── */
+.timeline-path {
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, 
+    rgba(229,193,0,0.6) 0%, 
+    rgba(255,45,45,0.6) 25%, 
+    rgba(255,140,0,0.6) 50%, 
+    rgba(0,212,170,0.6) 75%, 
+    rgba(224,224,240,0.6) 100%
+  );
+  box-shadow: 0 0 6px rgba(75,213,238,0.2);
 }
 
-/* Custom gradient overlays */
-.sw-gradient-dark {
-  background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.9) 100%);
+@media (min-width: 768px) {
+  .timeline-path {
+    left: 50%;
+    transform: translateX(-1px);
+  }
 }
 
-.sw-gradient-radial {
-  background: radial-gradient(ellipse at center, rgba(255, 232, 31, 0.05) 0%, transparent 70%);
+/* ─── Nebula Background ─── */
+.nebula-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(75,213,238,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(229,193,0,0.03) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 80%, rgba(255,45,45,0.03) 0%, transparent 40%),
+    radial-gradient(ellipse at 70% 60%, rgba(0,212,170,0.03) 0%, transparent 45%);
+  animation: nebula-drift 30s ease-in-out infinite;
+}
+
+/* ─── Glow button ─── */
+.glow-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.glow-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glow-btn:hover {
+  box-shadow: 0 0 15px var(--btn-glow, rgba(75,213,238,0.4)), 0 0 30px var(--btn-glow, rgba(75,213,238,0.2));
+}
+
+/* ─── Progress Bar Shimmer ─── */
+.progress-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: progress-shimmer 2s ease-in-out infinite;
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

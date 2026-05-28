@@ -14,10 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Star Wars — The Complete Saga",
-  description: "Explore the epic story of the Skywalker saga — from the fall of the Republic to the rise of the Empire, and the heroes who fought to restore freedom to the galaxy.",
-  keywords: ["Star Wars", "Skywalker Saga", "Jedi", "Sith", "Galactic Empire", "Rebellion", "Force"],
-  authors: [{ name: "Star Wars Fan Tribute" }],
+  title: "Star Wars Chronological Viewing Order",
+  description: "A curated journey through the main Star Wars movies and major series — from the fall of the Republic to the rise of the Empire, the Rebellion, the New Republic, and the final conflict with the First Order.",
+  keywords: ["Star Wars", "Chronological", "Viewing Order", "Timeline", "Jedi", "Sith", "Galactic Empire", "Rebellion"],
   icons: {
     icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
   },
@@ -31,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#050510] text-white`}
       >
         {children}
         <Toaster />

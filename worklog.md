@@ -1,43 +1,52 @@
 ---
 Task ID: 1
 Agent: Main Agent
-Task: Build Star Wars Website with intro crawl animations
+Task: Rebuild Star Wars website as cinematic chronological viewing guide
 
 Work Log:
-- Explored project structure and identified existing setup (Next.js 16, Tailwind CSS 4, shadcn/ui)
-- Generated 5 Star Wars themed AI images using z-ai-web-dev-sdk CLI tool:
-  - hero-space-battle.png (space battle hero image)
-  - dark-side.png (Sith Lord villain portrait)
-  - jedi-temple.png (Jedi temple scene)
-  - death-star.png (Death Star scene)
-  - tatooine.png (Tatooine twin suns landscape)
-- Created comprehensive Star Wars data file with all 11 movies (3 trilogies + 2 spin-offs), including:
-  - Full opening crawls, summaries, key events, characters, planets
-  - Era categorization with color coding
-  - Saga timeline data
-- Built Star Wars themed CSS with custom animations:
-  - Star Wars intro crawl (3D perspective scrolling text)
-  - Logo zoom animation
-  - Lightsaber glow effects (blue, red, green, yellow)
-  - Card hover effects with light sweep
-  - Pulsing text glow
+- Completely rebuilt the website from scratch with a new cinematic design
+- Created comprehensive data file (src/data/starWarsTimeline.ts) with 19 timeline entries across 5 eras, including:
+  - Fall of the Jedi (4 entries: Ep I-III + Clone Wars)
+  - Reign of the Empire (3 entries: Bad Batch, Solo, Obi-Wan)
+  - Age of Rebellion (5 entries: Rebels, Andor, Rogue One, Ep IV-VI)
+  - The New Republic (3 entries: Mandalorian, Book of Boba Fett, Ahsoka)
+  - Rise of the First Order (3 entries: Ep VII-IX)
+- Each entry includes: summary, beginnerSummary, whyWatchHere, continuityNote, tags, type, releaseYear
+- Added supplementary titles section (7 additional titles)
+- Rebuilt globals.css with:
+  - Holographic glassmorphism card effects (.holo-card)
+  - Scan line animation (.holo-scan)
+  - Lightsaber dividers (6 colors: blue, red, gold, orange, green, white)
+  - Nebula background animation
+  - Hyperspace streak animation
+  - Progress bar shimmer
+  - Reduced motion support (prefers-reduced-motion)
   - Custom scrollbar
-- Created component architecture:
-  - StarField: Canvas-based animated star field background
-  - IntroCrawl: 3-phase intro animation (blue text → logo zoom → crawl)
-  - Navbar: Sticky navigation with era links
-  - HeroSection: Full-screen hero with stats and scroll indicator
-  - Timeline: Vertical timeline with era-colored nodes
-  - SagaExplorer: Era sections with background images
-  - MovieCard: Expandable cards with key events, characters, planets, opening crawls
-- Built main page assembling all components with smooth transitions
-- Applied dark theme with Star Wars color palette (yellow #FFE81F, blue #4BD5EE, red #FF2D2D, green #00D4AA, orange #FF6B35)
-- Fixed lint errors (Roman numeral variables → numbers, setState in useEffect → direct state initialization)
-- Verified page renders with 200 status and lint passes clean
+- Built 12 new components in src/components/sw/:
+  - StarfieldBackground: Canvas-based animated starfield
+  - HyperspaceIntro: 3-phase intro (blue text → streaks → flash)
+  - Navbar: Sticky navigation with era links, mobile responsive
+  - Hero: Cinematic hero with title, subtitle, CTA buttons
+  - SearchBox: Search by title, era, tags, summary
+  - FilterBar: Era filter buttons (All + 5 eras) with color coding
+  - BeginnerModeToggle: Toggle for simplified viewing
+  - EraLegend: Color-coded era legend
+  - Timeline: Era-grouped timeline with filtering and search
+  - TimelineCard: Expandable holo-cards with overlap note for Andor/Rebels
+  - ProgressIndicator: Scroll progress bar at bottom
+  - SupplementaryTitles: Secondary section for additional titles
+  - Footer: Disclaimer footer
+- Main page assembled with all components, useSyncExternalStore for intro state
+- Generated nebula background image
+- Lint passes clean, dev server returns 200
 
 Stage Summary:
-- Fully functional Star Wars website with iconic intro crawl animation
-- Complete saga coverage across 11 films with detailed story information
-- Responsive design with mobile support
-- AI-generated themed images for visual atmosphere
-- All code passes ESLint checks
+- Complete cinematic Star Wars chronological viewing guide website
+- 19 timeline entries with search, filter, beginner mode
+- Hyperspace intro animation
+- Holographic glassmorphism card design
+- 5 era color themes with distinct visual accents
+- Fully responsive (mobile + desktop alternating timeline)
+- Accessibility: keyboard nav, ARIA labels, reduced-motion support
+- Overlap note for Andor/Rebels timeline
+- Supplementary titles section
