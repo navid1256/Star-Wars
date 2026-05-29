@@ -223,6 +223,16 @@
   opacity: 1;
 }
 
+/* ─── Poster image in holo card ─── */
+.holo-card img {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), filter 0.3s ease;
+}
+
+.holo-card:hover img {
+  transform: scale(1.04);
+  filter: brightness(1.1) saturate(1.1);
+}
+
 /* ─── Scan line overlay for holo effect ─── */
 .holo-scan {
   position: relative;

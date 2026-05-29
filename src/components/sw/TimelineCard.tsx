@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Film, Tv, Clapperboard, AlertCircle } from 'lucide-react';
 import { type TimelineItem, eraConfig } from '@/data/starWarsTimeline';
@@ -80,11 +81,11 @@ export default function TimelineCard({ item, beginnerMode, position, hasOverlapN
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-40px' }}
-              className="holo-card w-full max-w-md p-5 cursor-pointer"
+              className="holo-card w-full max-w-md cursor-pointer"
               style={{ '--era-color': `${cfg.color}50`, '--era-glow': cfg.glow } as React.CSSProperties}
               onClick={() => setExpanded(!expanded)}
             >
-              <CardInner item={item} beginnerMode={beginnerMode} expanded={expanded} cfg={cfg} Icon={Icon} />
+              <PosterCardInner item={item} beginnerMode={beginnerMode} expanded={expanded} cfg={cfg} Icon={Icon} />
             </motion.div>
           ) : (
             <div />
@@ -101,7 +102,6 @@ export default function TimelineCard({ item, beginnerMode, position, hasOverlapN
             className="w-3.5 h-3.5 rounded-full relative z-10"
             style={{ backgroundColor: cfg.color, boxShadow: `0 0 12px ${cfg.glow}, 0 0 4px ${cfg.color}` }}
           />
-          {/* Connector line to card */}
           <div
             className="w-[2px] h-3 opacity-30"
             style={{ backgroundColor: cfg.color }}
@@ -117,11 +117,11 @@ export default function TimelineCard({ item, beginnerMode, position, hasOverlapN
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-40px' }}
-              className="holo-card w-full max-w-md p-5 cursor-pointer"
+              className="holo-card w-full max-w-md cursor-pointer"
               style={{ '--era-color': `${cfg.color}50`, '--era-glow': cfg.glow } as React.CSSProperties}
               onClick={() => setExpanded(!expanded)}
             >
-              <CardInner item={item} beginnerMode={beginnerMode} expanded={expanded} cfg={cfg} Icon={Icon} />
+              <PosterCardInner item={item} beginnerMode={beginnerMode} expanded={expanded} cfg={cfg} Icon={Icon} />
             </motion.div>
           ) : (
             <div />
@@ -142,18 +142,18 @@ export default function TimelineCard({ item, beginnerMode, position, hasOverlapN
           whileInView={{ opacity: 1, x: 0, scale: 1 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ type: 'spring', stiffness: 220, damping: 24, mass: 0.8 }}
-          className="holo-card flex-1 p-4 cursor-pointer"
+          className="holo-card flex-1 cursor-pointer"
           style={{ '--era-color': `${cfg.color}50`, '--era-glow': cfg.glow } as React.CSSProperties}
           onClick={() => setExpanded(!expanded)}
         >
-          <CardInner item={item} beginnerMode={beginnerMode} expanded={expanded} cfg={cfg} Icon={Icon} />
+          <PosterCardInner item={item} beginnerMode={beginnerMode} expanded={expanded} cfg={cfg} Icon={Icon} />
         </motion.div>
       </div>
     </div>
   );
 }
 
-function CardInner({ item, beginnerMode, expanded, cfg, Icon }: {
+function PosterCardInner({ item, beginnerMode, expanded, cfg, Icon }: {
   item: TimelineItem;
   beginnerMode: boolean;
   expanded: boolean;
@@ -162,61 +162,85 @@ function CardInner({ item, beginnerMode, expanded, cfg, Icon }: {
 }) {
   return (
     <>
-      {/* Header */}
-      <div className="flex items-start justify-between gap-3 mb-2.5">
-        <div className="flex-1 min-w-0">
-          <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
-            <span
-              className="text-[0.6rem] font-bold tracking-[0.15em] px-2 py-0.5 rounded-md"
-              style={{ backgroundColor: `${cfg.color}18`, color: cfg.color, border: `1px solid ${cfg.color}30` }}
-            >
-              #{item.chronNumber}
-            </span>
-            <span
-              className="text-[0.6rem] tracking-[0.08em] uppercase px-2 py-0.5 rounded-md border"
-              style={{
-                color: typeColor[item.type],
-                borderColor: `${typeColor[item.type]}30`,
-                backgroundColor: `${typeColor[item.type]}10`,
-              }}
-            >
-              <Icon className="w-2.5 h-2.5 inline mr-0.5 -mt-0.5" />
-              {item.type}
-            </span>
-            <span className="text-white/25 text-[0.6rem]">{item.releaseYear}</span>
+      {/* Poster + Header row */}
+      <div className="flex gap-4 p-4 pb-3">
+        {/* Poster image */}
+        <div className="flex-shrink-0 w-[80px] md:w-[90px] relative overflow-hidden rounded-lg">
+          <div
+            className="absolute inset-0 z-[1] rounded-lg"
+            style={{ boxShadow: `inset 0 0 20px rgba(0,0,0,0.6), 0 0 8px ${cfg.glow}` }}
+          />
+          <Image
+            src={item.poster}
+            alt={`${item.title} poster`}
+            width={90}
+            height={160}
+            className="w-full h-auto object-cover rounded-lg"
+            style={{ aspectRatio: '768/1344' }}
+          />
+          {/* Number badge overlay */}
+          <div
+            className="absolute top-1 left-1 z-[2] text-[0.55rem] font-bold tracking-[0.12em] px-1.5 py-0.5 rounded-md"
+            style={{ backgroundColor: `${cfg.color}90`, color: '#050510' }}
+          >
+            #{item.chronNumber}
           </div>
-          <h3 className="text-base md:text-lg font-bold tracking-wide leading-snug" style={{ color: cfg.color }}>
-            {item.title}
-          </h3>
         </div>
-        <motion.div
-          animate={{ rotate: expanded ? 180 : 0 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-          className="text-white/20 mt-1 flex-shrink-0"
-        >
-          <ChevronDown className="w-4 h-4" />
-        </motion.div>
-      </div>
 
-      {/* Era tag */}
-      <div className="flex items-center gap-1.5 mb-2.5">
-        <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: cfg.color, boxShadow: `0 0 4px ${cfg.glow}` }} />
-        <span className="text-[0.6rem] tracking-[0.1em] uppercase" style={{ color: cfg.color }}>{item.era}</span>
-      </div>
+        {/* Text content */}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-start justify-between gap-2">
+            <div className="flex-1 min-w-0">
+              <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
+                <span
+                  className="text-[0.55rem] tracking-[0.08em] uppercase px-1.5 py-0.5 rounded-md border"
+                  style={{
+                    color: typeColor[item.type],
+                    borderColor: `${typeColor[item.type]}30`,
+                    backgroundColor: `${typeColor[item.type]}10`,
+                  }}
+                >
+                  <Icon className="w-2.5 h-2.5 inline mr-0.5 -mt-0.5" />
+                  {item.type}
+                </span>
+                <span className="text-white/25 text-[0.6rem]">{item.releaseYear}</span>
+              </div>
+              <h3 className="text-sm md:text-base font-bold tracking-wide leading-snug mb-1.5" style={{ color: cfg.color }}>
+                {item.title}
+              </h3>
+            </div>
+            <motion.div
+              animate={{ rotate: expanded ? 180 : 0 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+              className="text-white/20 flex-shrink-0 mt-0.5"
+            >
+              <ChevronDown className="w-4 h-4" />
+            </motion.div>
+          </div>
 
-      {/* Tags */}
-      <div className="flex flex-wrap gap-1 mb-3">
-        {item.tags.slice(0, 5).map((tag) => (
-          <span key={tag} className="text-[0.55rem] px-1.5 py-0.5 rounded bg-white/[0.03] border border-white/[0.06] text-white/35">
-            {tag}
-          </span>
-        ))}
+          {/* Era tag */}
+          <div className="flex items-center gap-1.5 mb-2">
+            <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: cfg.color, boxShadow: `0 0 4px ${cfg.glow}` }} />
+            <span className="text-[0.55rem] tracking-[0.1em] uppercase" style={{ color: cfg.color }}>{item.era}</span>
+          </div>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-1">
+            {item.tags.slice(0, 4).map((tag) => (
+              <span key={tag} className="text-[0.5rem] px-1.5 py-0.5 rounded bg-white/[0.03] border border-white/[0.06] text-white/35">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Summary */}
-      <p className="text-white/55 text-sm leading-relaxed">
-        {beginnerMode ? item.beginnerSummary : item.summary}
-      </p>
+      <div className="px-4 pb-3">
+        <p className="text-white/55 text-xs md:text-sm leading-relaxed">
+          {beginnerMode ? item.beginnerSummary : item.summary}
+        </p>
+      </div>
 
       {/* Expanded details */}
       <AnimatePresence>
@@ -228,14 +252,14 @@ function CardInner({ item, beginnerMode, expanded, cfg, Icon }: {
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             className="overflow-hidden"
           >
-            <div className="pt-4 space-y-3">
+            <div className="px-4 pb-4 space-y-3">
               <div className="h-px" style={{ background: `linear-gradient(90deg, transparent, ${cfg.color}40, transparent)`, boxShadow: `0 0 6px ${cfg.glow}` }} />
 
               <div>
                 <h4 className="text-[0.6rem] font-bold tracking-[0.1em] uppercase mb-1.5" style={{ color: cfg.accent }}>
                   Why Watch It Here
                 </h4>
-                <p className="text-white/50 text-sm leading-relaxed">{item.whyWatchHere}</p>
+                <p className="text-white/50 text-xs md:text-sm leading-relaxed">{item.whyWatchHere}</p>
               </div>
 
               {!beginnerMode && (
@@ -243,7 +267,7 @@ function CardInner({ item, beginnerMode, expanded, cfg, Icon }: {
                   <h4 className="text-[0.6rem] font-bold tracking-[0.1em] uppercase mb-1 text-[#E5C100]">
                     Beginner-Friendly Summary
                   </h4>
-                  <p className="text-white/45 text-sm leading-relaxed">{item.beginnerSummary}</p>
+                  <p className="text-white/45 text-xs md:text-sm leading-relaxed">{item.beginnerSummary}</p>
                 </div>
               )}
 
@@ -251,7 +275,7 @@ function CardInner({ item, beginnerMode, expanded, cfg, Icon }: {
                 <h4 className="text-[0.6rem] font-bold tracking-[0.1em] uppercase mb-1 text-white/40">
                   Continuity Note
                 </h4>
-                <p className="text-white/40 text-sm leading-relaxed">{item.continuityNote}</p>
+                <p className="text-white/40 text-xs md:text-sm leading-relaxed">{item.continuityNote}</p>
               </div>
             </div>
           </motion.div>
