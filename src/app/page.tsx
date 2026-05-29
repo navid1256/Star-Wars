@@ -53,20 +53,22 @@ export default function Home() {
             <Hero />
 
             {/* Why Chronological Order? */}
-            <section className="py-20 px-4 max-w-3xl mx-auto text-center">
+            <section className="py-16 px-4 max-w-3xl mx-auto text-center">
               <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-white/70 text-xl md:text-2xl font-bold tracking-[0.08em] uppercase mb-4"
-              >
-                Why Chronological Order?
-              </motion.h2>
-              <div className="ls-divider-blue max-w-[100px] mx-auto mb-6" />
-              <motion.p
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
+                transition={{ type: 'spring', stiffness: 200, damping: 22 }}
+                className="text-white/70 text-xl md:text-2xl font-bold tracking-[0.08em] uppercase mb-3"
+              >
+                Why Chronological Order?
+              </motion.h2>
+              <div className="ls-divider-blue max-w-[80px] mx-auto mb-5" />
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ type: 'spring', stiffness: 200, damping: 22, delay: 0.1 }}
                 className="text-white/40 text-sm md:text-base leading-relaxed"
               >
                 Watching Star Wars in chronological story order lets you experience the saga as one
@@ -79,28 +81,29 @@ export default function Home() {
             </section>
 
             {/* Featured: For Beginners */}
-            <section className="py-12 px-4 max-w-4xl mx-auto">
+            <section className="py-8 px-4 max-w-4xl mx-auto">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="relative rounded-xl overflow-hidden p-6 md:p-8 border border-[#E5C100]/15 bg-gradient-to-br from-[#E5C100]/5 via-transparent to-[#4BD5EE]/5"
+                transition={{ type: 'spring', stiffness: 200, damping: 22 }}
+                className="relative rounded-xl overflow-hidden p-5 md:p-7 border border-[#E5C100]/15 bg-gradient-to-br from-[#E5C100]/5 via-transparent to-[#4BD5EE]/5"
               >
                 <div className="flex items-start gap-4">
                   <div className="p-2.5 rounded-lg bg-[#E5C100]/10 border border-[#E5C100]/20 flex-shrink-0">
                     <Sparkles className="w-5 h-5 text-[#E5C100]" />
                   </div>
                   <div>
-                    <h3 className="text-[#E5C100] text-lg font-bold tracking-wide mb-2">
+                    <h3 className="text-[#E5C100] text-lg font-bold tracking-wide mb-1.5">
                       New to Star Wars?
                     </h3>
-                    <p className="text-white/50 text-sm leading-relaxed mb-3">
-                      This chronological order is the best way to experience the full saga for the first time. 
-                      Toggle <strong className="text-white/70">Beginner Mode</strong> below for simplified summaries and 
-                      spoiler-light descriptions. Every entry includes a &ldquo;Why Watch It Here&rdquo; explanation to 
+                    <p className="text-white/50 text-sm leading-relaxed mb-2.5">
+                      This chronological order is the best way to experience the full saga for the first time.
+                      Toggle <strong className="text-white/70">Beginner Mode</strong> below for simplified summaries and
+                      spoiler-light descriptions. Every entry includes a &ldquo;Why Watch It Here&rdquo; explanation to
                       guide your journey.
                     </p>
-                    <div className="flex flex-wrap gap-2 text-[0.65rem]">
+                    <div className="flex flex-wrap gap-2 text-[0.6rem]">
                       <span className="px-2.5 py-1 rounded-md bg-[#E5C100]/10 border border-[#E5C100]/20 text-[#E5C100]/70">19 Entries</span>
                       <span className="px-2.5 py-1 rounded-md bg-[#4BD5EE]/10 border border-[#4BD5EE]/20 text-[#4BD5EE]/70">5 Eras</span>
                       <span className="px-2.5 py-1 rounded-md bg-[#00D4AA]/10 border border-[#00D4AA]/20 text-[#00D4AA]/70">Movies + Series</span>
@@ -111,7 +114,7 @@ export default function Home() {
             </section>
 
             {/* Controls */}
-            <section id="timeline" className="px-4 max-w-6xl mx-auto mb-10 space-y-5">
+            <section id="timeline" className="px-4 max-w-6xl mx-auto mb-8 space-y-4">
               <EraLegend />
               <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
                 <div className="flex-1">

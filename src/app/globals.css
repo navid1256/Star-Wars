@@ -178,7 +178,10 @@
   border: 1px solid rgba(255,255,255,0.06);
   border-radius: 14px;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.2s ease,
+              box-shadow 0.25s ease;
+  will-change: transform;
 }
 
 .holo-card::before {
@@ -189,7 +192,7 @@
   width: 200%;
   height: 100%;
   background: linear-gradient(90deg, transparent 0%, rgba(75,213,238,0.03) 25%, rgba(255,255,255,0.04) 50%, rgba(75,213,238,0.03) 75%, transparent 100%);
-  transition: left 0.7s ease;
+  transition: left 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
   z-index: 1;
 }
@@ -203,13 +206,13 @@
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--era-color, rgba(75,213,238,0.4)), transparent);
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.2s ease;
 }
 
 .holo-card:hover {
   border-color: rgba(255,255,255,0.12);
-  transform: translateY(-3px);
-  box-shadow: 0 0 25px var(--era-glow, rgba(75,213,238,0.12)), 0 0 50px var(--era-glow, rgba(75,213,238,0.05)), 0 12px 40px rgba(0,0,0,0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px var(--era-glow, rgba(75,213,238,0.12)), 0 0 40px var(--era-glow, rgba(75,213,238,0.05)), 0 8px 30px rgba(0,0,0,0.4);
 }
 
 .holo-card:hover::before {
@@ -234,7 +237,7 @@
   right: 0;
   height: 40px;
   background: linear-gradient(180deg, transparent, rgba(75,213,238,0.03), transparent);
-  animation: scan-line 4s linear infinite;
+  animation: scan-line 2.5s linear infinite;
   pointer-events: none;
 }
 

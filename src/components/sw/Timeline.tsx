@@ -48,34 +48,33 @@ export default function Timeline({ filter, search, beginnerMode }: TimelineProps
   let globalPos = 0;
 
   return (
-    <div className="space-y-20">
+    <div className="space-y-16">
       {eraGroups.map((group) => {
         const cfg = eraConfig[group.era];
         const eraSlug = group.era.toLowerCase().replace(/\s+/g, '-');
-        const startPos = globalPos;
 
         return (
           <section key={group.era} id={`era-${eraSlug}`}>
             {/* Era header */}
-            <div className="relative mb-12">
-              <div className="flex items-center gap-4 mb-3">
+            <div className="relative mb-10">
+              <div className="flex items-center gap-3 mb-2">
                 <div
-                  className="w-1.5 h-10 rounded-full"
-                  style={{ backgroundColor: cfg.color, boxShadow: `0 0 12px ${cfg.glow}` }}
+                  className="w-1.5 h-8 rounded-full"
+                  style={{ backgroundColor: cfg.color, boxShadow: `0 0 10px ${cfg.glow}` }}
                 />
                 <h2
-                  className="text-2xl md:text-3xl font-black tracking-[0.1em] uppercase"
-                  style={{ color: cfg.color, textShadow: `0 0 20px ${cfg.glow}` }}
+                  className="text-xl md:text-2xl font-black tracking-[0.1em] uppercase"
+                  style={{ color: cfg.color, textShadow: `0 0 16px ${cfg.glow}` }}
                 >
                   {group.era}
                 </h2>
               </div>
-              <p className="text-white/40 text-sm tracking-wider ml-7 mb-4">
+              <p className="text-white/35 text-xs tracking-wider ml-5 mb-3">
                 {cfg.description}
               </p>
               <div
-                className="h-px ml-7"
-                style={{ background: `linear-gradient(90deg, ${cfg.color}, transparent 70%)`, boxShadow: `0 0 8px ${cfg.glow}` }}
+                className="h-px ml-5"
+                style={{ background: `linear-gradient(90deg, ${cfg.color}, transparent 60%)`, boxShadow: `0 0 6px ${cfg.glow}` }}
               />
             </div>
 
@@ -85,20 +84,20 @@ export default function Timeline({ filter, search, beginnerMode }: TimelineProps
               <div
                 className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[2px] -translate-x-[1px]"
                 style={{
-                  background: `linear-gradient(180deg, ${cfg.color}40, ${cfg.color}15)`,
-                  boxShadow: `0 0 8px ${cfg.glow}`,
+                  background: `linear-gradient(180deg, ${cfg.color}40, ${cfg.color}10)`,
+                  boxShadow: `0 0 6px ${cfg.glow}`,
                 }}
               />
               {/* Left line - mobile */}
               <div
-                className="md:hidden absolute left-[7px] top-0 bottom-0 w-[2px]"
+                className="md:hidden absolute left-[6px] top-0 bottom-0 w-[2px]"
                 style={{
-                  background: `linear-gradient(180deg, ${cfg.color}40, ${cfg.color}15)`,
-                  boxShadow: `0 0 6px ${cfg.glow}`,
+                  background: `linear-gradient(180deg, ${cfg.color}40, ${cfg.color}10)`,
+                  boxShadow: `0 0 4px ${cfg.glow}`,
                 }}
               />
 
-              <div className="space-y-10">
+              <div className="space-y-8">
                 {group.items.map((item) => {
                   const pos = globalPos++;
                   const hasOverlapNote = item.id === 9;
