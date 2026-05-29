@@ -20,13 +20,13 @@ export default function FilterBar({ active, onChange }: FilterBarProps) {
     <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by era">
       <button
         onClick={() => onChange('All')}
-        className={`px-3 py-1.5 rounded-md text-xs tracking-[0.1em] uppercase border transition-all ${
+        className={`px-4 py-2 rounded-lg text-xs tracking-[0.08em] uppercase border transition-all duration-300 ${
           active === 'All'
-            ? 'bg-white/10 border-white/25 text-white'
-            : 'bg-transparent border-white/8 text-white/35 hover:text-white/60 hover:border-white/15'
+            ? 'bg-white/8 border-white/20 text-white/90'
+            : 'bg-transparent border-white/5 text-white/25 hover:text-white/50 hover:border-white/12 hover:bg-white/[0.02]'
         }`}
       >
-        All
+        All Eras
       </button>
       {eras.map((era) => {
         const cfg = eraConfig[era];
@@ -35,15 +35,16 @@ export default function FilterBar({ active, onChange }: FilterBarProps) {
           <button
             key={era}
             onClick={() => onChange(era)}
-            className={`px-3 py-1.5 rounded-md text-xs tracking-[0.1em] uppercase border transition-all ${
+            className={`px-4 py-2 rounded-lg text-xs tracking-[0.08em] uppercase border transition-all duration-300 ${
               isActive
-                ? 'border-current text-white'
-                : 'bg-transparent text-white/30 hover:text-white/60'
+                ? 'text-white/90'
+                : 'bg-transparent text-white/25 hover:text-white/50 hover:bg-white/[0.02]'
             }`}
             style={{
-              borderColor: isActive ? `${cfg.color}50` : undefined,
-              backgroundColor: isActive ? `${cfg.color}15` : undefined,
+              borderColor: isActive ? `${cfg.color}40` : undefined,
+              backgroundColor: isActive ? `${cfg.color}12` : undefined,
               color: isActive ? cfg.color : undefined,
+              boxShadow: isActive ? `0 0 12px ${cfg.glow}` : undefined,
             }}
           >
             {era}

@@ -38,54 +38,76 @@ export default function Timeline({ filter, search, beginnerMode }: TimelineProps
 
   if (filtered.length === 0) {
     return (
-      <div className="text-center py-20">
+      <div className="text-center py-24">
         <p className="text-white/30 text-sm tracking-wider">No entries match your search.</p>
       </div>
     );
   }
 
+  // Track global position for alternating
+  let globalPos = 0;
+
   return (
-    <div className="space-y-16">
+    <div className="space-y-20">
       {eraGroups.map((group) => {
         const cfg = eraConfig[group.era];
         const eraSlug = group.era.toLowerCase().replace(/\s+/g, '-');
+        const startPos = globalPos;
+
         return (
           <section key={group.era} id={`era-${eraSlug}`}>
             {/* Era header */}
-            <div className="relative mb-10 overflow-hidden rounded-xl">
-              <div className="p-6 md:p-8">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-1 h-8 rounded-full" style={{ backgroundColor: cfg.color, boxShadow: `0 0 10px ${cfg.glow}` }} />
-                  <h2 className="text-xl md:text-2xl font-black tracking-[0.12em] uppercase" style={{ color: cfg.color }}>
-                    {group.era}
-                  </h2>
-                </div>
-                <p className="text-white/35 text-xs md:text-sm tracking-wider ml-5 pl-0.5">
-                  {cfg.description}
-                </p>
-                <div className="mt-3 ml-5" style={{ background: `linear-gradient(90deg, ${cfg.color}50, transparent)`, height: '1px' }} />
+            <div className="relative mb-12">
+              <div className="flex items-center gap-4 mb-3">
+                <div
+                  className="w-1.5 h-10 rounded-full"
+                  style={{ backgroundColor: cfg.color, boxShadow: `0 0 12px ${cfg.glow}` }}
+                />
+                <h2
+                  className="text-2xl md:text-3xl font-black tracking-[0.1em] uppercase"
+                  style={{ color: cfg.color, textShadow: `0 0 20px ${cfg.glow}` }}
+                >
+                  {group.era}
+                </h2>
               </div>
+              <p className="text-white/40 text-sm tracking-wider ml-7 mb-4">
+                {cfg.description}
+              </p>
+              <div
+                className="h-px ml-7"
+                style={{ background: `linear-gradient(90deg, ${cfg.color}, transparent 70%)`, boxShadow: `0 0 8px ${cfg.glow}` }}
+              />
             </div>
 
-            {/* Timeline cards */}
+            {/* Timeline */}
             <div className="relative">
-              {/* Timeline path line */}
-              <div className="absolute left-[22px] md:left-1/2 top-0 bottom-0 w-[2px] md:-translate-x-[1px]" style={{
-                background: `linear-gradient(180deg, ${cfg.color}50, ${cfg.color}20)`,
-                boxShadow: `0 0 6px ${cfg.glow}`,
-              }} />
+              {/* Center line - desktop */}
+              <div
+                className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[2px] -translate-x-[1px]"
+                style={{
+                  background: `linear-gradient(180deg, ${cfg.color}40, ${cfg.color}15)`,
+                  boxShadow: `0 0 8px ${cfg.glow}`,
+                }}
+              />
+              {/* Left line - mobile */}
+              <div
+                className="md:hidden absolute left-[7px] top-0 bottom-0 w-[2px]"
+                style={{
+                  background: `linear-gradient(180deg, ${cfg.color}40, ${cfg.color}15)`,
+                  boxShadow: `0 0 6px ${cfg.glow}`,
+                }}
+              />
 
-              <div className="space-y-8 ml-0 md:ml-0">
-                {group.items.map((item, i) => {
-                  const globalIndex = timelineData.indexOf(item);
-                  const hasOverlapNote = item.id === 9; // Andor gets the overlap note
+              <div className="space-y-10">
+                {group.items.map((item) => {
+                  const pos = globalPos++;
+                  const hasOverlapNote = item.id === 9;
                   return (
                     <TimelineCard
                       key={item.id}
                       item={item}
                       beginnerMode={beginnerMode}
-                      index={globalIndex}
-                      isLast={i === group.items.length - 1}
+                      position={pos}
                       hasOverlapNote={hasOverlapNote}
                     />
                   );

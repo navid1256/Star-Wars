@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { eraConfig, type Era } from '@/data/starWarsTimeline';
 
 const navItems = [
   { label: 'Timeline', href: '#timeline' },
@@ -34,9 +33,11 @@ export default function Navbar() {
     <motion.nav
       initial={{ y: -60 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.4, delay: 0.2 }}
+      transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
-        scrolled ? 'bg-[#050510]/90 backdrop-blur-lg border-b border-white/5' : 'bg-transparent'
+        scrolled
+          ? 'bg-[#050510]/90 backdrop-blur-xl border-b border-white/5 shadow-[0_2px_20px_rgba(0,0,0,0.5)]'
+          : 'bg-transparent'
       }`}
       role="navigation"
       aria-label="Main navigation"
@@ -44,18 +45,21 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-14">
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="text-[#4BD5EE] font-black tracking-[0.2em] text-sm md:text-base hover:opacity-80 transition-opacity"
+          className="flex items-center gap-2 group"
           aria-label="Scroll to top"
         >
-          SW CHRONO
+          <div className="w-2 h-2 rounded-full bg-[#4BD5EE] shadow-[0_0_6px_rgba(75,213,238,0.5)] group-hover:shadow-[0_0_12px_rgba(75,213,238,0.7)] transition-shadow" />
+          <span className="text-[#4BD5EE]/80 font-black tracking-[0.18em] text-xs md:text-sm group-hover:text-[#4BD5EE] transition-colors">
+            SW CHRONO
+          </span>
         </button>
 
-        <div className="hidden lg:flex items-center gap-5">
+        <div className="hidden lg:flex items-center gap-1">
           {navItems.map((item) => (
             <button
               key={item.href}
               onClick={() => scrollTo(item.href)}
-              className="text-white/40 hover:text-[#4BD5EE] text-[0.65rem] tracking-[0.15em] uppercase transition-colors"
+              className="text-white/30 hover:text-[#4BD5EE] text-[0.6rem] tracking-[0.12em] uppercase px-3 py-1.5 rounded-md hover:bg-white/[0.03] transition-all duration-200"
             >
               {item.label}
             </button>
@@ -64,7 +68,7 @@ export default function Navbar() {
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="lg:hidden text-white/50 hover:text-[#4BD5EE] transition-colors"
+          className="lg:hidden text-white/40 hover:text-[#4BD5EE] transition-colors p-1"
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
         >
           {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -77,14 +81,14 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-[#050510]/95 backdrop-blur-md border-b border-white/5"
+            className="lg:hidden bg-[#050510]/95 backdrop-blur-xl border-b border-white/5"
           >
-            <div className="px-4 py-3 space-y-2">
+            <div className="px-4 py-3 space-y-1">
               {navItems.map((item) => (
                 <button
                   key={item.href}
                   onClick={() => scrollTo(item.href)}
-                  className="block w-full text-left text-white/40 hover:text-[#4BD5EE] text-xs tracking-[0.15em] uppercase py-2 transition-colors"
+                  className="block w-full text-left text-white/30 hover:text-[#4BD5EE] text-xs tracking-[0.12em] uppercase py-2.5 px-2 rounded-md hover:bg-white/[0.03] transition-all"
                 >
                   {item.label}
                 </button>

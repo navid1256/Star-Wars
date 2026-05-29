@@ -1,52 +1,37 @@
 ---
 Task ID: 1
 Agent: Main Agent
-Task: Rebuild Star Wars website as cinematic chronological viewing guide
+Task: Fix timeline card alternating layout, intro animation, and improve UI/UX
 
 Work Log:
-- Completely rebuilt the website from scratch with a new cinematic design
-- Created comprehensive data file (src/data/starWarsTimeline.ts) with 19 timeline entries across 5 eras, including:
-  - Fall of the Jedi (4 entries: Ep I-III + Clone Wars)
-  - Reign of the Empire (3 entries: Bad Batch, Solo, Obi-Wan)
-  - Age of Rebellion (5 entries: Rebels, Andor, Rogue One, Ep IV-VI)
-  - The New Republic (3 entries: Mandalorian, Book of Boba Fett, Ahsoka)
-  - Rise of the First Order (3 entries: Ep VII-IX)
-- Each entry includes: summary, beginnerSummary, whyWatchHere, continuityNote, tags, type, releaseYear
-- Added supplementary titles section (7 additional titles)
-- Rebuilt globals.css with:
-  - Holographic glassmorphism card effects (.holo-card)
-  - Scan line animation (.holo-scan)
-  - Lightsaber dividers (6 colors: blue, red, gold, orange, green, white)
-  - Nebula background animation
-  - Hyperspace streak animation
-  - Progress bar shimmer
-  - Reduced motion support (prefers-reduced-motion)
-  - Custom scrollbar
-- Built 12 new components in src/components/sw/:
-  - StarfieldBackground: Canvas-based animated starfield
-  - HyperspaceIntro: 3-phase intro (blue text → streaks → flash)
-  - Navbar: Sticky navigation with era links, mobile responsive
-  - Hero: Cinematic hero with title, subtitle, CTA buttons
-  - SearchBox: Search by title, era, tags, summary
-  - FilterBar: Era filter buttons (All + 5 eras) with color coding
-  - BeginnerModeToggle: Toggle for simplified viewing
-  - EraLegend: Color-coded era legend
-  - Timeline: Era-grouped timeline with filtering and search
-  - TimelineCard: Expandable holo-cards with overlap note for Andor/Rebels
-  - ProgressIndicator: Scroll progress bar at bottom
-  - SupplementaryTitles: Secondary section for additional titles
-  - Footer: Disclaimer footer
-- Main page assembled with all components, useSyncExternalStore for intro state
-- Generated nebula background image
-- Lint passes clean, dev server returns 200
+- Fixed TimelineCard alternating layout: Replaced broken isLeft/order-2 flex approach with a clean 3-column system (left-half | center-dot | right-half). Left cards render in left column, right cards in right column, with empty spacer divs on the opposite side. This ensures true left-right alternation on desktop.
+- Fixed HyperspaceIntro animation:
+  - Used useMemo with stable generateStreaks() to prevent random values on re-render
+  - Shortened timing: 2.2s text → 2s streaks → 0.35s flash (was 3s/2.5s/0.6s)
+  - Changed flash from harsh white to blue (#4BD5EE) with 0.8 opacity max
+  - Improved streak animation with scaleY/scaleX instead of massive scale:50
+  - Better central glow with layered box-shadows
+- Improved Hero section:
+  - Added "Galactic Archive" label badge at top
+  - Larger title sizes (up to 8xl on lg)
+  - Added floating particles animation
+  - Radial vignette overlay
+  - Better button hover states with group hover
+  - "Scroll" label above chevron indicator
+- Improved UI/UX throughout:
+  - Added "New to Star Wars?" featured recommendation panel with beginner mode CTA
+  - Wider timeline container (max-w-6xl instead of max-w-5xl)
+  - Better era headers with glowing text shadows
+  - Improved FilterBar with active glow effects and "All Eras" label
+  - Better SearchBox with focus shadow glow
+  - Enhanced holo-card: 2px top glow bar, wider sweep animation, deeper hover shadows
+  - Improved Navbar with dot logo, better hover states, shadow on scroll
+  - Better SupplementaryTitles and Footer spacing
+  - Cards use text-sm instead of text-xs for summaries (more readable)
+- All lint checks pass, dev server returns 200
 
 Stage Summary:
-- Complete cinematic Star Wars chronological viewing guide website
-- 19 timeline entries with search, filter, beginner mode
-- Hyperspace intro animation
-- Holographic glassmorphism card design
-- 5 era color themes with distinct visual accents
-- Fully responsive (mobile + desktop alternating timeline)
-- Accessibility: keyboard nav, ARIA labels, reduced-motion support
-- Overlap note for Andor/Rebels timeline
-- Supplementary titles section
+- Timeline cards now properly alternate left/right on desktop
+- Intro animation is faster and more cinematic with stable streak data
+- UI significantly improved with better typography, spacing, and visual effects
+- Added beginner recommendation panel
