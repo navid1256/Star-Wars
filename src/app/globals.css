@@ -104,6 +104,20 @@
 ::-webkit-scrollbar-thumb:hover { background: rgba(75,213,238,0.4); }
 
 /* ─── Hyperspace Intro ─── */
+@keyframes blueTextFade {
+  0% { opacity: 0; transform: translateY(12px); }
+  12% { opacity: 1; transform: translateY(0); }
+  75% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-4px); }
+}
+
+@keyframes starWarsLogo {
+  0% { opacity: 0; transform: scale(0.25); }
+  12% { opacity: 1; transform: scale(1); }
+  45% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(10); }
+}
+
 @keyframes hyperspace-streak {
   0% { transform: translateZ(0) scale(1); opacity: 1; }
   100% { transform: translateZ(800px) scale(80); opacity: 0; }

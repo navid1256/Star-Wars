@@ -22,20 +22,20 @@ const StarfieldBackground = dynamic(() => import('@/components/sw/StarfieldBackg
 function useHasSeenIntro() {
   return useSyncExternalStore(
     () => () => {},
-    () => sessionStorage.getItem('sw-chrono-intro-seen'),
+    () => localStorage.getItem('sw-chrono-intro-v3'),
     () => null
   );
 }
 
 export default function Home() {
   const hasSeenIntro = useHasSeenIntro();
-  const [introComplete, setIntroComplete] = useState(!!hasSeenIntro);
+  const [introComplete, setIntroComplete] = useState(() => !!hasSeenIntro);
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<Era | 'All'>('All');
   const [beginnerMode, setBeginnerMode] = useState(false);
 
   const handleIntroComplete = useCallback(() => {
-    sessionStorage.setItem('sw-chrono-intro-seen', 'true');
+    localStorage.setItem('sw-chrono-intro-v3', 'true');
     setIntroComplete(true);
   }, []);
 

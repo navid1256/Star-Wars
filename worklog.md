@@ -35,3 +35,44 @@ Stage Summary:
 - Intro animation is faster and more cinematic with stable streak data
 - UI significantly improved with better typography, spacing, and visual effects
 - Added beginner recommendation panel
+
+---
+Task ID: 2
+Agent: Main Agent
+Task: Replace crawl text with site description and remove loop
+
+Work Log:
+- Replaced CRAWL_TEXT from "It is a period of galactic history..." to site description text: "STAR WARS CHRONOLOGICAL VIEWING ORDER" with paragraphs describing the website's purpose, 19 titles across 5 eras, interactive timeline features
+- Added title styling for first two lines of crawl (larger, bold, tracked) vs body text (light, normal)
+- Removed star streak looping: stars that fly off-screen now stay gone instead of resetting to center (no loop)
+- Changed star initial positions to start near center (0.4 * maxR) for a natural outward streaking effect
+- Changed storage from sessionStorage to localStorage (key: sw-chrono-intro-v3) so intro plays once and never repeats
+- All lint checks pass
+
+Stage Summary:
+- Crawl text now describes the website instead of Star Wars lore
+- Star streaks are non-looping (fly out once, don't reset)
+- Intro plays once per browser (localStorage), no repeat on refresh
+- Title lines in crawl are styled larger/bolder
+
+---
+Task ID: 3
+Agent: Main Agent
+Task: Restore original Star Wars crawl and add site description as new phase at end
+
+Work Log:
+- Restored original CRAWL_TEXT ("It is a period of galactic history...") — the classic Star Wars crawl
+- Restored star streak looping behavior (stars reset to center when they fly off-screen)
+- Restored star initial positions (spread across screen, not just near center)
+- Added new 'description' phase after 'crawl' phase in the intro sequence
+- Created SITE_DESC constant with site description text (blue colored, different from yellow crawl)
+- Added descCrawlIn CSS keyframe animation in globals.css for smooth 3D perspective entrance
+- Site description uses #4BD5EE (Star Wars blue) color vs #FFE81F (yellow) for crawl — visual distinction
+- Phase timing: blue-text(0-3.2s) → logo(3.2-6.8s) → crawl(6.8-15s) → description(15-18.5s) → fade-out(18.5-19.2s) → done
+- No loop: localStorage key sw-chrono-intro-v3 ensures intro plays only once
+- Lint passes clean
+
+Stage Summary:
+- Original Star Wars crawl animation fully restored
+- Site description appears as Phase 4 after the crawl, using same 3D perspective style but in blue
+- Intro plays once (no loop on refresh)
