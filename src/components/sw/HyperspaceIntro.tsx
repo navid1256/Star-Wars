@@ -316,11 +316,6 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
           {/* Phase 3: Crawl text in 3D perspective — includes description at the end */}
           {(phase === 'crawl' || phase === 'fade-out') && (
             <div className="absolute inset-0 z-10 overflow-hidden flex items-start justify-center">
-              {/* Fade overlay at top */}
-              <div
-                className="absolute top-0 left-0 right-0 h-[40%] z-20 pointer-events-none"
-                style={{ background: 'linear-gradient(to bottom, #000000 0%, #000000 20%, transparent 100%)' }}
-              />
               {/* Fade overlay at bottom */}
               <div
                 className="absolute bottom-0 left-0 right-0 h-[12%] z-20 pointer-events-none"
