@@ -83,7 +83,15 @@ export default function Hero({ sortMode, onSortChange }: HeroProps) {
           >
             Star Wars
           </span>
-          <span className="block text-white/90 mt-1">Viewing Order</span>
+          <span
+            className="block mt-1"
+            style={{
+              color: '#FF2D2D',
+              textShadow: '0 0 30px rgba(255,45,45,0.5), 0 0 80px rgba(255,45,45,0.2)',
+            }}
+          >
+            Viewing Order
+          </span>
         </motion.h1>
 
         {/* Subtitle */}

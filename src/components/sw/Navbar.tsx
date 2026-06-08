@@ -45,7 +45,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-14">
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="flex items-center gap-2 group"
+          className="flex items-center gap-2 group cursor-pointer"
           aria-label="Scroll to top"
         >
           <div className="w-2 h-2 rounded-full bg-[#4BD5EE] shadow-[0_0_6px_rgba(75,213,238,0.5)] group-hover:shadow-[0_0_12px_rgba(75,213,238,0.7)] transition-shadow" />
@@ -59,7 +59,7 @@ export default function Navbar() {
             <button
               key={item.href}
               onClick={() => scrollTo(item.href)}
-              className="text-white/30 hover:text-[#4BD5EE] text-[0.6rem] tracking-[0.12em] uppercase px-3 py-1.5 rounded-md hover:bg-white/[0.03] transition-all duration-200"
+              className="text-white/30 hover:text-[#4BD5EE] text-[0.6rem] tracking-[0.12em] uppercase px-3 py-1.5 rounded-md hover:bg-white/[0.03] transition-all duration-200 cursor-pointer"
             >
               {item.label}
             </button>
@@ -68,7 +68,7 @@ export default function Navbar() {
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="lg:hidden text-white/40 hover:text-[#4BD5EE] transition-colors p-1"
+          className="lg:hidden text-white/40 hover:text-[#4BD5EE] transition-colors p-1 cursor-pointer"
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
         >
           {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
