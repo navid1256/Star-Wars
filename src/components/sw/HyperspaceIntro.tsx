@@ -262,13 +262,13 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
               }}
             >
               <p
-                className="text-[#4BD5EE] text-lg sm:text-2xl md:text-4xl tracking-[0.2em] font-light leading-relaxed"
+                className="text-[#4BD5EE] text-2xl sm:text-3xl md:text-5xl tracking-[0.2em] font-light leading-relaxed"
                 style={{ textShadow: '0 0 30px rgba(75,213,238,0.6), 0 0 60px rgba(75,213,238,0.3), 0 0 90px rgba(75,213,238,0.15)' }}
               >
                 A long time ago in a galaxy far,
               </p>
               <p
-                className="text-[#4BD5EE] text-lg sm:text-2xl md:text-4xl tracking-[0.2em] font-light mt-3"
+                className="text-[#4BD5EE] text-2xl sm:text-3xl md:text-5xl tracking-[0.2em] font-light mt-3"
                 style={{ textShadow: '0 0 30px rgba(75,213,238,0.6), 0 0 60px rgba(75,213,238,0.3), 0 0 90px rgba(75,213,238,0.15)' }}
               >
                 far away….
@@ -335,7 +335,7 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
                         return (
                           <p
                             key={i}
-                            className="text-[#FFE81F] text-xl sm:text-2xl md:text-3xl font-light leading-relaxed mb-3 tracking-wide"
+                            className="text-[#FFE81F] text-2xl sm:text-3xl md:text-4xl font-light leading-relaxed mb-4 tracking-wide"
                             style={{
                               textShadow: '0 0 14px rgba(255,232,31,0.45)',
                               fontFamily: '"Segoe UI", system-ui, sans-serif',
