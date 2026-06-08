@@ -272,12 +272,6 @@ function PosterImage({ item, cfg, isLeft, targetHeight }: {
           sizes={`${posterWidth || 120}px`}
         />
         <div
-          className="absolute top-2 left-2 z-[2] text-[0.6rem] font-bold tracking-[0.12em] px-2 py-0.5 rounded-md"
-          style={{ backgroundColor: `${cfg.color}CC`, color: '#050510' }}
-        >
-          #{item.chronNumber}
-        </div>
-        <div
           className="absolute bottom-0 left-0 right-0 h-1/3 z-[1] pointer-events-none rounded-b-lg"
           style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.6), transparent)' }}
         />
@@ -323,12 +317,7 @@ function PosterImageInline({ item, cfg }: {
           className="object-cover"
           sizes="70px"
         />
-        <div
-          className="absolute top-1 left-1 z-[2] text-[0.45rem] font-bold tracking-[0.1em] px-1 py-0.5 rounded"
-          style={{ backgroundColor: `${cfg.color}CC`, color: '#050510' }}
-        >
-          #{item.chronNumber}
-        </div>
+
       </div>
     </motion.div>
   );

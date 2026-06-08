@@ -104,32 +104,40 @@ export default function Hero({ sortMode, onSortChange }: HeroProps) {
           transition={{ type: 'spring', stiffness: 180, damping: 22, delay: 0.7 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6"
         >
-          {/* Chronological Order (Story Timeline) */}
+          {/* Chronological Order (Story Timeline) — Blue / Jedi */}
           <button
             onClick={() => handleSortChange('chronological')}
-            className={`glow-btn group px-7 py-3.5 text-sm tracking-[0.12em] uppercase rounded-lg transition-all duration-300 ${
+            className={`glow-btn group relative px-7 py-3.5 text-sm tracking-[0.14em] uppercase rounded-lg transition-all duration-300 overflow-hidden ${
               sortMode === 'chronological'
-                ? 'bg-[#4BD5EE]/20 border-2 border-[#4BD5EE]/70 text-[#4BD5EE] shadow-[0_0_20px_rgba(75,213,238,0.2)]'
-                : 'bg-[#4BD5EE]/8 border border-[#4BD5EE]/30 text-[#4BD5EE]/60 hover:bg-[#4BD5EE]/15 hover:border-[#4BD5EE]/50 hover:text-[#4BD5EE]/80'
+                ? 'bg-[#4BD5EE]/20 border-2 border-[#4BD5EE]/80 text-[#4BD5EE] shadow-[0_0_24px_rgba(75,213,238,0.3),0_0_48px_rgba(75,213,238,0.1)]'
+                : 'bg-[#4BD5EE]/6 border border-[#4BD5EE]/25 text-[#4BD5EE]/50 hover:bg-[#4BD5EE]/12 hover:border-[#4BD5EE]/45 hover:text-[#4BD5EE]/75'
             }`}
-            style={{ '--btn-glow': 'rgba(75,213,238,0.3)' } as React.CSSProperties}
+            style={{ '--btn-glow': 'rgba(75,213,238,0.4)' } as React.CSSProperties}
             aria-label="Sort by chronological story order"
           >
+            {/* Lightsaber glow line at top */}
+            {sortMode === 'chronological' && (
+              <span className="absolute top-0 left-0 right-0 h-[2px] rounded-t-lg" style={{ background: 'linear-gradient(90deg, transparent, #4BD5EE, transparent)', boxShadow: '0 0 8px rgba(75,213,238,0.6), 0 0 16px rgba(75,213,238,0.3)' }} />
+            )}
             <Clock className="w-4 h-4 inline mr-2 -mt-0.5 group-hover:scale-110 transition-transform" />
             Chronological Order
           </button>
 
-          {/* Release Order */}
+          {/* Release Order — Red / Sith */}
           <button
             onClick={() => handleSortChange('release')}
-            className={`glow-btn group px-7 py-3.5 text-sm tracking-[0.12em] uppercase rounded-lg transition-all duration-300 ${
+            className={`glow-btn group relative px-7 py-3.5 text-sm tracking-[0.14em] uppercase rounded-lg transition-all duration-300 overflow-hidden ${
               sortMode === 'release'
-                ? 'bg-[#E5C100]/20 border-2 border-[#E5C100]/70 text-[#E5C100] shadow-[0_0_20px_rgba(229,193,0,0.2)]'
-                : 'bg-[#E5C100]/8 border border-[#E5C100]/30 text-[#E5C100]/60 hover:bg-[#E5C100]/15 hover:border-[#E5C100]/50 hover:text-[#E5C100]/80'
+                ? 'bg-[#FF2D2D]/20 border-2 border-[#FF2D2D]/80 text-[#FF2D2D] shadow-[0_0_24px_rgba(255,45,45,0.3),0_0_48px_rgba(255,45,45,0.1)]'
+                : 'bg-[#FF2D2D]/6 border border-[#FF2D2D]/25 text-[#FF2D2D]/50 hover:bg-[#FF2D2D]/12 hover:border-[#FF2D2D]/45 hover:text-[#FF2D2D]/75'
             }`}
-            style={{ '--btn-glow': 'rgba(229,193,0,0.3)' } as React.CSSProperties}
+            style={{ '--btn-glow': 'rgba(255,45,45,0.4)' } as React.CSSProperties}
             aria-label="Sort by theatrical release order"
           >
+            {/* Lightsaber glow line at top */}
+            {sortMode === 'release' && (
+              <span className="absolute top-0 left-0 right-0 h-[2px] rounded-t-lg" style={{ background: 'linear-gradient(90deg, transparent, #FF2D2D, transparent)', boxShadow: '0 0 8px rgba(255,45,45,0.6), 0 0 16px rgba(255,45,45,0.3)' }} />
+            )}
             <Film className="w-4 h-4 inline mr-2 -mt-0.5 group-hover:scale-110 transition-transform" />
             Release Order
           </button>
