@@ -94,7 +94,7 @@ export default function IntroCrawl({ onComplete }: IntroCrawlProps) {
       {/* Phase 3: Opening Crawl */}
       {phase === 'crawl' && (
         <div className="crawl-perspective w-full h-full flex items-start justify-center pt-20">
-          <div className="w-[80%] max-w-2xl crawl-text">
+          <div className="w-[80%] max-w-4xl crawl-text">
             <h2
               className="text-[#FFE81F] text-2xl md:text-4xl text-center font-bold tracking-wider mb-8"
               style={{

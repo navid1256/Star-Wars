@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Film, Tv, Clapperboard, AlertCircle } from 'lucide-react';
@@ -73,6 +73,23 @@ export default function TimelineCard({ item, beginnerMode, position, hasOverlapN
   const Icon = typeIcon[item.type];
   const isLeft = position % 2 === 0;
 
+  /* Measure the holo-card height so the poster can match it */
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [cardHeight, setCardHeight] = useState<number>(0);
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (cardRef.current) {
+        setCardHeight(cardRef.current.getBoundingClientRect().height);
+      }
+    };
+    updateHeight();
+
+    const observer = new ResizeObserver(updateHeight);
+    if (cardRef.current) observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="relative" id={`card-${item.chronNumber}`}>
       {/* Overlap note for Andor/Rebels */}
@@ -100,6 +117,7 @@ export default function TimelineCard({ item, beginnerMode, position, hasOverlapN
           {isLeft ? (
             /* Card is on LEFT */
             <motion.div
+              ref={cardRef}
               custom={isLeft}
               variants={cardVariants}
               initial="hidden"
@@ -113,7 +131,7 @@ export default function TimelineCard({ item, beginnerMode, position, hasOverlapN
             </motion.div>
           ) : (
             /* Card is on RIGHT → poster goes in LEFT column */
-            <PosterImage item={item} cfg={cfg} isLeft={isLeft} />
+            <PosterImage item={item} cfg={cfg} isLeft={isLeft} targetHeight={cardHeight} />
           )}
         </div>
 
@@ -138,6 +156,7 @@ export default function TimelineCard({ item, beginnerMode, position, hasOverlapN
           {!isLeft ? (
             /* Card is on RIGHT */
             <motion.div
+              ref={cardRef}
               custom={isLeft}
               variants={cardVariants}
               initial="hidden"
@@ -151,7 +170,7 @@ export default function TimelineCard({ item, beginnerMode, position, hasOverlapN
             </motion.div>
           ) : (
             /* Card is on LEFT → poster goes in RIGHT column */
-            <PosterImage item={item} cfg={cfg} isLeft={isLeft} />
+            <PosterImage item={item} cfg={cfg} isLeft={isLeft} targetHeight={cardHeight} />
           )}
         </div>
       </div>
@@ -186,12 +205,9 @@ export default function TimelineCard({ item, beginnerMode, position, hasOverlapN
 
 /* ─── 3D Tilt Hook ─── */
 function useTilt(intensity: number = 10) {
-  const ref = useRef<HTMLDivElement>(null);
-
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
-      const el = ref.current;
-      if (!el) return;
+      const el = e.currentTarget;
       const rect = el.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
@@ -200,22 +216,26 @@ function useTilt(intensity: number = 10) {
     [intensity]
   );
 
-  const handleMouseLeave = useCallback(() => {
-    const el = ref.current;
-    if (!el) return;
-    el.style.transform = 'perspective(600px) rotateY(0deg) rotateX(0deg) scale(1)';
+  const handleMouseLeave = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    e.currentTarget.style.transform = 'perspective(600px) rotateY(0deg) rotateX(0deg) scale(1)';
   }, []);
 
-  return { ref, handleMouseMove, handleMouseLeave };
+  return { handleMouseMove, handleMouseLeave };
 }
 
-/* ─── Poster Image (Desktop - in opposite column) ─── */
-function PosterImage({ item, cfg, isLeft }: {
+/* ─── Poster Image (Desktop - in opposite column, height matches card) ─── */
+function PosterImage({ item, cfg, isLeft, targetHeight }: {
   item: TimelineItem;
   cfg: (typeof eraConfig)[keyof typeof eraConfig];
   isLeft: boolean;
+  targetHeight: number;
 }) {
   const tilt = useTilt(10);
+
+  /* Calculate poster dimensions to match card height while maintaining aspect ratio */
+  const posterAspectRatio = 768 / 1344; // ≈ 0.571
+  const posterHeight = targetHeight > 0 ? targetHeight : undefined;
+  const posterWidth = posterHeight ? posterHeight * posterAspectRatio : undefined;
 
   return (
     <motion.div
@@ -224,19 +244,20 @@ function PosterImage({ item, cfg, isLeft }: {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: '-20px' }}
-      className="w-[120px] flex-shrink-0"
-      style={{ marginTop: '28px' }}
+      className="flex-shrink-0"
+      style={{ marginTop: '9px' }}
     >
       <div
-        ref={tilt.ref}
         onMouseMove={tilt.handleMouseMove}
         onMouseLeave={tilt.handleMouseLeave}
-        className="w-full relative overflow-hidden rounded-lg cursor-pointer"
+        className="relative overflow-hidden rounded-lg cursor-pointer"
         style={{
           transition: 'transform 0.15s ease-out',
           boxShadow: `0 8px 32px rgba(0,0,0,0.7), 0 0 24px ${cfg.glow}, 0 0 8px ${cfg.color}40`,
           border: `1.5px solid ${cfg.color}30`,
           aspectRatio: '768/1344',
+          width: posterWidth ? `${posterWidth}px` : '120px',
+          height: posterHeight ? `${posterHeight}px` : undefined,
         }}
       >
         <div
@@ -248,7 +269,7 @@ function PosterImage({ item, cfg, isLeft }: {
           alt={`${item.title} poster`}
           fill
           className="object-cover"
-          sizes="120px"
+          sizes={`${posterWidth || 120}px`}
         />
         <div
           className="absolute top-2 left-2 z-[2] text-[0.6rem] font-bold tracking-[0.12em] px-2 py-0.5 rounded-md"
@@ -281,7 +302,6 @@ function PosterImageInline({ item, cfg }: {
       className="absolute right-2 top-2 z-20 w-[70px]"
     >
       <div
-        ref={tilt.ref}
         onMouseMove={tilt.handleMouseMove}
         onMouseLeave={tilt.handleMouseLeave}
         className="w-full relative overflow-hidden rounded-lg cursor-pointer"
