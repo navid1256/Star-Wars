@@ -177,7 +177,7 @@ export default function TimelineCard({ item, beginnerMode, position, hasOverlapN
 }
 
 /* ─── 3D Tilt Hook for Poster ─── */
-function useTilt(intensity: number = 12) {
+function useTilt(intensity: number = 10) {
   const ref = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = useCallback(
@@ -187,7 +187,7 @@ function useTilt(intensity: number = 12) {
       const rect = el.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
-      el.style.transform = `perspective(500px) rotateY(${x * intensity}deg) rotateX(${-y * intensity}deg) scale(1.06)`;
+      el.style.transform = `perspective(600px) rotateY(${x * intensity}deg) rotateX(${-y * intensity}deg) scale(1.04)`;
     },
     [intensity]
   );
@@ -195,7 +195,7 @@ function useTilt(intensity: number = 12) {
   const handleMouseLeave = useCallback(() => {
     const el = ref.current;
     if (!el) return;
-    el.style.transform = 'perspective(500px) rotateY(0deg) rotateX(0deg) scale(1)';
+    el.style.transform = 'perspective(600px) rotateY(0deg) rotateX(0deg) scale(1)';
   }, []);
 
   return { ref, handleMouseMove, handleMouseLeave };
@@ -210,118 +210,122 @@ function PosterCardInner({ item, beginnerMode, expanded, cfg, Icon, isLeft }: {
   Icon: React.ComponentType<{ className?: string }>;
   isLeft: boolean;
 }) {
-  const tilt = useTilt(14);
+  const tilt = useTilt(10);
 
-  // When card is on the LEFT → poster on the RIGHT (toward center)
-  // When card is on the RIGHT → poster on the LEFT (toward center)
+  // Card LEFT of timeline → poster on RIGHT edge (facing center)
+  // Card RIGHT of timeline → poster on LEFT edge (facing center)
   const posterOnRight = isLeft;
 
   return (
     <>
-      <div className="relative">
-        {/* ── Poster overlapping on card edge ── */}
-        <motion.div
-          custom={isLeft}
-          variants={posterVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-20px' }}
-          className="absolute z-20"
+      {/* ── Full-height poster on the edge facing the timeline ── */}
+      <motion.div
+        custom={isLeft}
+        variants={posterVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-20px' }}
+        className="absolute z-20"
+        style={{
+          top: 0,
+          bottom: 0,
+          [posterOnRight ? 'right' : 'left']: '-55px',
+          width: '110px',
+        }}
+      >
+        <div
+          ref={tilt.ref}
+          onMouseMove={tilt.handleMouseMove}
+          onMouseLeave={tilt.handleMouseLeave}
+          className="w-full h-full relative overflow-hidden rounded-lg cursor-pointer"
           style={{
-            top: '16px',
-            [posterOnRight ? 'right' : 'left']: '-40px',
+            transition: 'transform 0.15s ease-out',
+            boxShadow: `0 8px 32px rgba(0,0,0,0.7), 0 0 24px ${cfg.glow}, 0 0 8px ${cfg.color}40`,
+            border: `1.5px solid ${cfg.color}30`,
           }}
         >
+          {/* Inner vignette */}
           <div
-            ref={tilt.ref}
-            onMouseMove={tilt.handleMouseMove}
-            onMouseLeave={tilt.handleMouseLeave}
-            className="w-[90px] md:w-[105px] relative overflow-hidden rounded-lg cursor-pointer"
-            style={{
-              transition: 'transform 0.15s ease-out',
-              boxShadow: `0 8px 32px rgba(0,0,0,0.7), 0 0 20px ${cfg.glow}, 0 0 6px ${cfg.color}40`,
-              border: `1.5px solid ${cfg.color}30`,
-            }}
+            className="absolute inset-0 z-[1] rounded-lg pointer-events-none"
+            style={{ boxShadow: 'inset 0 0 30px rgba(0,0,0,0.5)' }}
+          />
+          <Image
+            src={item.poster}
+            alt={`${item.title} poster`}
+            fill
+            className="object-cover"
+            sizes="110px"
+          />
+          {/* Number badge overlay */}
+          <div
+            className="absolute top-2 left-2 z-[2] text-[0.6rem] font-bold tracking-[0.12em] px-2 py-0.5 rounded-md"
+            style={{ backgroundColor: `${cfg.color}CC`, color: '#050510' }}
           >
-            {/* Inner vignette */}
-            <div
-              className="absolute inset-0 z-[1] rounded-lg pointer-events-none"
-              style={{ boxShadow: `inset 0 0 25px rgba(0,0,0,0.5)` }}
-            />
-            <Image
-              src={item.poster}
-              alt={`${item.title} poster`}
-              width={105}
-              height={184}
-              className="w-full h-auto object-cover"
-              style={{ aspectRatio: '768/1344' }}
-            />
-            {/* Number badge overlay */}
-            <div
-              className="absolute top-1.5 left-1.5 z-[2] text-[0.55rem] font-bold tracking-[0.12em] px-1.5 py-0.5 rounded-md"
-              style={{ backgroundColor: `${cfg.color}CC`, color: '#050510' }}
-            >
-              #{item.chronNumber}
-            </div>
+            #{item.chronNumber}
           </div>
-        </motion.div>
+          {/* Gradient overlay at bottom of poster */}
+          <div
+            className="absolute bottom-0 left-0 right-0 h-1/3 z-[1] pointer-events-none rounded-b-lg"
+            style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.6), transparent)' }}
+          />
+        </div>
+      </motion.div>
 
-        {/* ── Card text content ── */}
-        {/* Add padding on the poster side to prevent text overlap */}
-        <div style={{ [posterOnRight ? 'paddingRight' : 'paddingLeft']: '70px' }}>
-          {/* Header row */}
-          <div className="px-4 pt-4 pb-2">
-            <div className="flex items-start justify-between gap-2">
-              <div className="flex-1 min-w-0">
-                <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
-                  <span
-                    className="text-[0.55rem] tracking-[0.08em] uppercase px-1.5 py-0.5 rounded-md border"
-                    style={{
-                      color: typeColor[item.type],
-                      borderColor: `${typeColor[item.type]}30`,
-                      backgroundColor: `${typeColor[item.type]}10`,
-                    }}
-                  >
-                    <Icon className="w-2.5 h-2.5 inline mr-0.5 -mt-0.5" />
-                    {item.type}
-                  </span>
-                  <span className="text-white/25 text-[0.6rem]">{item.releaseYear}</span>
-                </div>
-                <h3 className="text-sm md:text-base font-bold tracking-wide leading-snug mb-1.5" style={{ color: cfg.color }}>
-                  {item.title}
-                </h3>
-              </div>
-              <motion.div
-                animate={{ rotate: expanded ? 180 : 0 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                className="text-white/20 flex-shrink-0 mt-0.5"
-              >
-                <ChevronDown className="w-4 h-4" />
-              </motion.div>
-            </div>
-
-            {/* Era tag */}
-            <div className="flex items-center gap-1.5 mb-2">
-              <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: cfg.color, boxShadow: `0 0 4px ${cfg.glow}` }} />
-              <span className="text-[0.55rem] tracking-[0.1em] uppercase" style={{ color: cfg.color }}>{item.era}</span>
-            </div>
-
-            {/* Tags */}
-            <div className="flex flex-wrap gap-1">
-              {item.tags.slice(0, 4).map((tag) => (
-                <span key={tag} className="text-[0.5rem] px-1.5 py-0.5 rounded bg-white/[0.03] border border-white/[0.06] text-white/35">
-                  {tag}
+      {/* ── Card text content ── */}
+      {/* Padding on poster side so text doesn't overlap */}
+      <div style={{ [posterOnRight ? 'paddingRight' : 'paddingLeft']: '65px' }}>
+        {/* Header row */}
+        <div className="px-4 pt-4 pb-2">
+          <div className="flex items-start justify-between gap-2">
+            <div className="flex-1 min-w-0">
+              <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
+                <span
+                  className="text-[0.55rem] tracking-[0.08em] uppercase px-1.5 py-0.5 rounded-md border"
+                  style={{
+                    color: typeColor[item.type],
+                    borderColor: `${typeColor[item.type]}30`,
+                    backgroundColor: `${typeColor[item.type]}10`,
+                  }}
+                >
+                  <Icon className="w-2.5 h-2.5 inline mr-0.5 -mt-0.5" />
+                  {item.type}
                 </span>
-              ))}
+                <span className="text-white/25 text-[0.6rem]">{item.releaseYear}</span>
+              </div>
+              <h3 className="text-sm md:text-base font-bold tracking-wide leading-snug mb-1.5" style={{ color: cfg.color }}>
+                {item.title}
+              </h3>
             </div>
+            <motion.div
+              animate={{ rotate: expanded ? 180 : 0 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+              className="text-white/20 flex-shrink-0 mt-0.5"
+            >
+              <ChevronDown className="w-4 h-4" />
+            </motion.div>
           </div>
 
-          {/* Summary */}
-          <div className="px-4 pb-3">
-            <p className="text-white/55 text-xs md:text-sm leading-relaxed">
-              {beginnerMode ? item.beginnerSummary : item.summary}
-            </p>
+          {/* Era tag */}
+          <div className="flex items-center gap-1.5 mb-2">
+            <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: cfg.color, boxShadow: `0 0 4px ${cfg.glow}` }} />
+            <span className="text-[0.55rem] tracking-[0.1em] uppercase" style={{ color: cfg.color }}>{item.era}</span>
           </div>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-1">
+            {item.tags.slice(0, 4).map((tag) => (
+              <span key={tag} className="text-[0.5rem] px-1.5 py-0.5 rounded bg-white/[0.03] border border-white/[0.06] text-white/35">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Summary */}
+        <div className="px-4 pb-3">
+          <p className="text-white/55 text-xs md:text-sm leading-relaxed">
+            {beginnerMode ? item.beginnerSummary : item.summary}
+          </p>
         </div>
       </div>
 
@@ -335,7 +339,7 @@ function PosterCardInner({ item, beginnerMode, expanded, cfg, Icon, isLeft }: {
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             className="overflow-hidden"
           >
-            <div className="px-4 pb-4 space-y-3">
+            <div className="px-4 pb-4 space-y-3" style={{ [posterOnRight ? 'paddingRight' : 'paddingLeft']: '65px' }}>
               <div className="h-px" style={{ background: `linear-gradient(90deg, transparent, ${cfg.color}40, transparent)`, boxShadow: `0 0 6px ${cfg.glow}` }} />
 
               <div>
