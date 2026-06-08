@@ -253,7 +253,6 @@ function PosterImage({ item, cfg, isLeft, targetHeight }: {
         className="relative overflow-hidden rounded-lg cursor-pointer"
         style={{
           transition: 'transform 0.15s ease-out',
-          boxShadow: `0 8px 32px rgba(0,0,0,0.7), 0 0 24px ${cfg.glow}, 0 0 8px ${cfg.color}40`,
           border: `1.5px solid ${cfg.color}30`,
           aspectRatio: '768/1344',
           width: posterWidth ? `${posterWidth}px` : '120px',
@@ -301,7 +300,6 @@ function PosterImageInline({ item, cfg }: {
         className="w-full relative overflow-hidden rounded-lg cursor-pointer"
         style={{
           transition: 'transform 0.15s ease-out',
-          boxShadow: `0 4px 16px rgba(0,0,0,0.6), 0 0 12px ${cfg.glow}`,
           border: `1px solid ${cfg.color}30`,
           aspectRatio: '768/1344',
         }}
