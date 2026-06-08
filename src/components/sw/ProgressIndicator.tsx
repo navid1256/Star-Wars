@@ -25,7 +25,7 @@ export default function ProgressIndicator() {
           boxShadow: '0 0 8px rgba(75,213,238,0.3)',
         }}
       >
-        <div className="progress-shimmer h-full w-full" />
+        <div className="h-full w-full" />
       </div>
     </div>
   );
