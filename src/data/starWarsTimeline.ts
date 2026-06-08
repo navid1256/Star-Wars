@@ -188,7 +188,7 @@ export const timelineData: TimelineItem[] = [
     type: "Movie",
     releaseYear: "2016",
     era: "Age of Rebellion",
-    poster: "/posters/rogue1.jpg",
+    poster: "/posters/rogue-one.jpg",
     tags: ["spin-off", "death-star-plans", "sacrifice", "scarif", "vader"],
     summary: "The story of the unlikely heroes who stole the Death Star plans. Jyn Erso, daughter of the Death Star's reluctant creator Galen Erso, joins a ragtag group of rebels on a suicide mission to Scarif. Against impossible odds, they transmit the plans to the Rebel fleet — but at the ultimate cost. Every member of Rogue One perishes. The film ends with Darth Vader's terrifying corridor massacre as the plans pass to Princess Leia — connecting directly to A New Hope.",
     beginnerSummary: "A group of rebels go on a dangerous mission to steal the plans for the Death Star, a weapon that can destroy entire planets. Everyone on the team sacrifices their lives so that the Rebellion can have a chance. The ending leads right into the first Star Wars movie.",
