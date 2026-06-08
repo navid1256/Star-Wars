@@ -7,15 +7,13 @@ interface HyperspaceIntroProps {
   onComplete: () => void;
 }
 
-const CRAWL_TEXT = `YOUR STAR WARS JOURNEY STARTS HERE
+const CRAWL_TEXT = `It is a time of endless choices. Across the galaxy, countless viewers struggle to find the right path through the Star Wars saga — unsure where to begin, what to watch next, or how the story truly unfolds.
 
-Are you ready to explore the Star Wars saga but unsure where to begin? This interactive timeline is your definitive guide.
+This interactive timeline is your guide. Nineteen titles across five eras, arranged in the exact order events happen within the galaxy — so you can experience every twist, revelation, and character arc exactly as intended.
 
-Nineteen titles across five eras — arranged in the exact order events unfold within the galaxy. No more guessing which film comes next. No more accidental spoilers from watching out of sequence.
+No more guessing which film comes next. No more accidental spoilers from watching out of sequence. From the fall of the Jedi and the rise of the Empire, through the Rebellion's fight for freedom, to the fragile peace of the New Republic and the terrifying return of the First Order — the complete story awaits.
 
-Follow the story from the fall of the Jedi and the rise of the Empire, through the Rebellion's fight for freedom, to the fragile peace of the New Republic and the terrifying return of the First Order. Every twist, revelation, and character arc hits with maximum impact when experienced in chronological order.
-
-Each entry provides context on why it matters at that point in the story, era placement, and viewing guidance — whether you are a first-time viewer or a lifelong fan rediscovering the saga.
+Each entry provides context on why it matters at that point in the timeline, era placement, and viewing guidance — whether you are a first-time viewer or a lifelong fan rediscovering the saga.
 
 May the Force be with you on your journey.`;
 
@@ -328,26 +326,18 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
                     transformOrigin: '50% 100%',
                   }}
                 >
-                  <div className="text-center max-w-3xl mx-auto">
+                  <div className="text-center max-w-2xl mx-auto">
                     {(() => {
                       const lines = CRAWL_TEXT.split('\n');
                       return lines.map((paragraph, i) => {
-                        const isTitle = i === 0;
                         const isEmpty = paragraph.trim() === '';
-                        if (isEmpty) return <div key={i} className="h-4" />;
+                        if (isEmpty) return <div key={i} className="h-6" />;
                         return (
                           <p
                             key={i}
-                            className={`text-[#FFE81F] leading-relaxed mb-2 tracking-wide ${
-                              isTitle
-                                ? 'text-3xl sm:text-5xl md:text-6xl tracking-[0.15em] mb-6'
-                                : 'text-xl sm:text-2xl md:text-3xl font-light'
-                            }`}
+                            className="text-[#FFE81F] text-xl sm:text-2xl md:text-3xl font-light leading-relaxed mb-3 tracking-wide"
                             style={{
-                              fontWeight: isTitle ? 700 : 300,
-                              textShadow: isTitle
-                                ? '0 0 25px rgba(255,232,31,0.7), 0 0 50px rgba(255,232,31,0.35)'
-                                : '0 0 14px rgba(255,232,31,0.45)',
+                              textShadow: '0 0 14px rgba(255,232,31,0.45)',
                               fontFamily: '"Segoe UI", system-ui, sans-serif',
                             }}
                           >
