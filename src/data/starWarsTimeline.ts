@@ -314,7 +314,7 @@ export const timelineData: TimelineItem[] = [
     type: "Movie",
     releaseYear: "2019",
     era: "Rise of the First Order",
-    poster: "/posters/ep9.jpg",
+    poster: "/posters/episode9.jpg",
     tags: ["sequel", "palpatine-return", "rey-palpatine", "ben-solo", "exegol"],
     summary: "Emperor Palpatine has returned from beyond death with a massive fleet — the Final Order. Rey discovers her heritage: she is a Palpatine, but chooses the path of the Jedi. Kylo Ren is redeemed by the memory of his father and returns as Ben Solo. In an epic final battle above Exegol, the citizens' fleet arrives. Rey confronts Palpatine, channeling the power of all the Jedi who came before her. The Emperor is destroyed. Ben Solo sacrifices himself to save Rey. The Skywalker saga ends with Rey taking the Skywalker name on Tatooine.",
     beginnerSummary: "The evil Emperor has somehow come back to life with a massive fleet. Rey learns she comes from the Emperor's family, but she chooses to be a Jedi. Kylo Ren turns back to the good side and becomes Ben Solo again. Together, they defeat the Emperor once and for all. Rey takes the name Skywalker to honor the people who believed in her.",

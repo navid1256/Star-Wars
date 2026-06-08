@@ -21,7 +21,7 @@ May the Force be with you on your journey.`;
 const POSTER_PATHS = [
   '/posters/ep1.jpg', '/posters/ep2.jpg', '/posters/ep3.jpg', '/posters/ep4.jpg',
   '/posters/ep5.jpg', '/posters/ep6.jpg', '/posters/ep7.jpg', '/posters/ep8.jpg',
-  '/posters/ep9.jpg', '/posters/solo.jpg', '/posters/rogue-one.jpg', '/posters/cw.jpg',
+  '/posters/episode9.jpg', '/posters/solo.jpg', '/posters/rogue-one.jpg', '/posters/cw.jpg',
   '/posters/rebels.jpg', '/posters/andor.jpg', '/posters/ahsoka.jpg', '/posters/bb.jpg',
   '/posters/bobafett.jpg', '/posters/mando.jpg', '/posters/obiwan.jpg',
 ];
