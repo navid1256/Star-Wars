@@ -107,7 +107,7 @@ export default function Hero({ sortMode, onSortChange }: HeroProps) {
           {/* Chronological Order (Story Timeline) — Blue / Jedi */}
           <button
             onClick={() => handleSortChange('chronological')}
-            className={`glow-btn group relative px-7 py-3.5 text-sm tracking-[0.14em] uppercase rounded-lg transition-all duration-300 overflow-hidden ${
+            className={`glow-btn group relative px-7 py-3.5 text-sm tracking-[0.14em] uppercase rounded-lg cursor-pointer transition-all duration-300 overflow-hidden ${
               sortMode === 'chronological'
                 ? 'bg-[#4BD5EE]/20 border-2 border-[#4BD5EE]/80 text-[#4BD5EE] shadow-[0_0_24px_rgba(75,213,238,0.3),0_0_48px_rgba(75,213,238,0.1)]'
                 : 'bg-[#4BD5EE]/6 border border-[#4BD5EE]/25 text-[#4BD5EE]/50 hover:bg-[#4BD5EE]/12 hover:border-[#4BD5EE]/45 hover:text-[#4BD5EE]/75'
@@ -126,7 +126,7 @@ export default function Hero({ sortMode, onSortChange }: HeroProps) {
           {/* Release Order — Red / Sith */}
           <button
             onClick={() => handleSortChange('release')}
-            className={`glow-btn group relative px-7 py-3.5 text-sm tracking-[0.14em] uppercase rounded-lg transition-all duration-300 overflow-hidden ${
+            className={`glow-btn group relative px-7 py-3.5 text-sm tracking-[0.14em] uppercase rounded-lg cursor-pointer transition-all duration-300 overflow-hidden ${
               sortMode === 'release'
                 ? 'bg-[#FF2D2D]/20 border-2 border-[#FF2D2D]/80 text-[#FF2D2D] shadow-[0_0_24px_rgba(255,45,45,0.3),0_0_48px_rgba(255,45,45,0.1)]'
                 : 'bg-[#FF2D2D]/6 border border-[#FF2D2D]/25 text-[#FF2D2D]/50 hover:bg-[#FF2D2D]/12 hover:border-[#FF2D2D]/45 hover:text-[#FF2D2D]/75'
