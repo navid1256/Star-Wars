@@ -256,7 +256,7 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
           {/* Skip button */}
           <button
             onClick={skip}
-            className="absolute top-5 right-5 z-[60] text-white/30 hover:text-white/70 text-[0.6rem] tracking-[0.25em] uppercase border border-white/8 hover:border-white/20 px-3 py-1.5 rounded transition-all"
+            className="absolute top-5 right-5 z-[60] text-white/30 hover:text-white/70 text-[0.6rem] tracking-[0.25em] uppercase border border-white/8 hover:border-white/20 px-3 py-1.5 rounded transition-all cursor-pointer"
             aria-label="Skip intro animation"
           >
             SKIP
