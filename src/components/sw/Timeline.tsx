@@ -44,12 +44,13 @@ export default function Timeline({ filter, search, beginnerMode, sortMode }: Tim
   });
 
   // Group by era (preserving the sorted order)
-  const eraGroups: { era: Era; items: typeof filtered }[] = [];
+  // Use a unique groupIndex to avoid duplicate keys when the same era appears multiple times
+  const eraGroups: { era: Era; groupIndex: number; items: typeof filtered }[] = [];
   let currentEra: Era | null = null;
   for (const item of filtered) {
     if (item.era !== currentEra) {
       currentEra = item.era;
-      eraGroups.push({ era: currentEra, items: [] });
+      eraGroups.push({ era: currentEra, groupIndex: eraGroups.length, items: [] });
     }
     eraGroups[eraGroups.length - 1].items.push(item);
   }
@@ -70,9 +71,10 @@ export default function Timeline({ filter, search, beginnerMode, sortMode }: Tim
       {eraGroups.map((group) => {
         const cfg = eraConfig[group.era];
         const eraSlug = group.era.toLowerCase().replace(/\s+/g, '-');
+        const uniqueKey = `era-${group.groupIndex}-${eraSlug}`;
 
         return (
-          <section key={group.era} id={`era-${eraSlug}`}>
+          <section key={uniqueKey} id={`era-${eraSlug}-${group.groupIndex}`}>
             {/* Era header */}
             <div className="relative mb-10">
               <div className="flex items-center gap-3 mb-2">
@@ -85,6 +87,11 @@ export default function Timeline({ filter, search, beginnerMode, sortMode }: Tim
                   style={{ color: cfg.color, textShadow: `0 0 16px ${cfg.glow}` }}
                 >
                   {group.era}
+                  {sortMode === 'release' && (
+                    <span className="text-white/20 text-xs font-normal tracking-normal ml-2 lowercase">
+                      ({group.items.map(i => i.releaseYear).join(', ')})
+                    </span>
+                  )}
                 </h2>
               </div>
               <p className="text-white/35 text-xs tracking-wider ml-5 mb-3">
