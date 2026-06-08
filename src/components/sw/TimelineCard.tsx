@@ -44,6 +44,29 @@ const cardVariants = {
   },
 };
 
+/* Poster animation matches card entrance direction */
+const posterVariants = {
+  hidden: (isLeft: boolean) => ({
+    opacity: 0,
+    x: isLeft ? -40 : 40,
+    scale: 0.85,
+    rotateY: isLeft ? -15 : 15,
+  }),
+  visible: {
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    rotateY: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 220,
+      damping: 24,
+      mass: 0.8,
+      delay: 0.12,
+    },
+  },
+};
+
 export default function TimelineCard({ item, beginnerMode, position, hasOverlapNote }: TimelineCardProps) {
   const [expanded, setExpanded] = useState(false);
   const cfg = eraConfig[item.era];
@@ -189,63 +212,65 @@ function PosterCardInner({ item, beginnerMode, expanded, cfg, Icon, isLeft }: {
 }) {
   const tilt = useTilt(14);
 
+  // When card is on the LEFT → poster on the RIGHT (toward center)
+  // When card is on the RIGHT → poster on the LEFT (toward center)
+  const posterOnRight = isLeft;
+
   return (
     <>
-      {/* Poster overlapping on top of card */}
       <div className="relative">
-        <div
-          className="absolute -top-14 z-20"
-          style={{ [isLeft ? 'right' : 'left']: '20px' }}
+        {/* ── Poster overlapping on card edge ── */}
+        <motion.div
+          custom={isLeft}
+          variants={posterVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-20px' }}
+          className="absolute z-20"
+          style={{
+            top: '16px',
+            [posterOnRight ? 'right' : 'left']: '-40px',
+          }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.8 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: '-20px' }}
-            transition={{ type: 'spring', stiffness: 260, damping: 20, delay: 0.15 }}
+          <div
+            ref={tilt.ref}
+            onMouseMove={tilt.handleMouseMove}
+            onMouseLeave={tilt.handleMouseLeave}
+            className="w-[90px] md:w-[105px] relative overflow-hidden rounded-lg cursor-pointer"
+            style={{
+              transition: 'transform 0.15s ease-out',
+              boxShadow: `0 8px 32px rgba(0,0,0,0.7), 0 0 20px ${cfg.glow}, 0 0 6px ${cfg.color}40`,
+              border: `1.5px solid ${cfg.color}30`,
+            }}
           >
+            {/* Inner vignette */}
             <div
-              ref={tilt.ref}
-              onMouseMove={tilt.handleMouseMove}
-              onMouseLeave={tilt.handleMouseLeave}
-              className="w-[100px] md:w-[110px] relative overflow-hidden rounded-lg cursor-pointer"
-              style={{
-                transition: 'transform 0.15s ease-out',
-                boxShadow: `0 8px 32px rgba(0,0,0,0.7), 0 0 20px ${cfg.glow}, 0 0 6px ${cfg.color}40`,
-                border: `1.5px solid ${cfg.color}30`,
-              }}
+              className="absolute inset-0 z-[1] rounded-lg pointer-events-none"
+              style={{ boxShadow: `inset 0 0 25px rgba(0,0,0,0.5)` }}
+            />
+            <Image
+              src={item.poster}
+              alt={`${item.title} poster`}
+              width={105}
+              height={184}
+              className="w-full h-auto object-cover"
+              style={{ aspectRatio: '768/1344' }}
+            />
+            {/* Number badge overlay */}
+            <div
+              className="absolute top-1.5 left-1.5 z-[2] text-[0.55rem] font-bold tracking-[0.12em] px-1.5 py-0.5 rounded-md"
+              style={{ backgroundColor: `${cfg.color}CC`, color: '#050510' }}
             >
-              {/* Glow border effect */}
-              <div
-                className="absolute inset-0 z-[1] rounded-lg pointer-events-none"
-                style={{ boxShadow: `inset 0 0 25px rgba(0,0,0,0.5)` }}
-              />
-              <Image
-                src={item.poster}
-                alt={`${item.title} poster`}
-                width={110}
-                height={193}
-                className="w-full h-auto object-cover"
-                style={{ aspectRatio: '768/1344' }}
-              />
-              {/* Number badge overlay */}
-              <div
-                className="absolute top-1.5 left-1.5 z-[2] text-[0.6rem] font-bold tracking-[0.12em] px-2 py-0.5 rounded-md"
-                style={{ backgroundColor: `${cfg.color}CC`, color: '#050510' }}
-              >
-                #{item.chronNumber}
-              </div>
-              {/* Shine effect on hover */}
-              <div className="absolute inset-0 z-[3] pointer-events-none opacity-0 hover-shine"
-                style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%, rgba(255,255,255,0.05) 100%)' }}
-              />
+              #{item.chronNumber}
             </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
 
-        {/* Card content - top padding to make room for overlapping poster */}
-        <div className="pt-14">
+        {/* ── Card text content ── */}
+        {/* Add padding on the poster side to prevent text overlap */}
+        <div style={{ [posterOnRight ? 'paddingRight' : 'paddingLeft']: '70px' }}>
           {/* Header row */}
-          <div className="px-4 pt-3 pb-2">
+          <div className="px-4 pt-4 pb-2">
             <div className="flex items-start justify-between gap-2">
               <div className="flex-1 min-w-0">
                 <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
