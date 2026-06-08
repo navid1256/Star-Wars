@@ -1,11 +1,22 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ChevronDown, Play, Compass } from 'lucide-react';
+import { ChevronDown, Compass, Clock, Film } from 'lucide-react';
+import type { SortMode } from '@/app/page';
 
-export default function Hero() {
+interface HeroProps {
+  sortMode: SortMode;
+  onSortChange: (mode: SortMode) => void;
+}
+
+export default function Hero({ sortMode, onSortChange }: HeroProps) {
   const scrollToTimeline = () => {
     document.getElementById('timeline')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleSortChange = (mode: SortMode) => {
+    onSortChange(mode);
+    scrollToTimeline();
   };
 
   return (
@@ -72,16 +83,7 @@ export default function Hero() {
           >
             Star Wars
           </span>
-          <span className="block text-white/90 mt-1">Chronological</span>
-          <span
-            className="block mt-1"
-            style={{
-              color: '#E5C100',
-              textShadow: '0 0 30px rgba(229,193,0,0.5), 0 0 80px rgba(229,193,0,0.2)',
-            }}
-          >
-            Viewing Order
-          </span>
+          <span className="block text-white/90 mt-1">Viewing Order</span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -91,44 +93,58 @@ export default function Hero() {
           transition={{ type: 'spring', stiffness: 180, damping: 22, delay: 0.55 }}
           className="text-white/45 text-sm md:text-base lg:text-lg leading-relaxed max-w-2xl mx-auto mb-10"
         >
-          A curated journey through the main Star Wars movies and major series — from the fall
-          of the Republic to the rise of the Empire, the Rebellion, the New Republic, and the
-          final conflict with the First Order.
+          Experience the complete Star Wars saga in your preferred order — follow the
+          story as it unfolds in-universe, or watch it the way audiences first discovered it.
         </motion.p>
 
-        {/* Buttons */}
+        {/* Sort Mode Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: 'spring', stiffness: 180, damping: 22, delay: 0.7 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6"
         >
+          {/* Chronological Order (Story Timeline) */}
           <button
-            onClick={scrollToTimeline}
-            className="glow-btn group px-7 py-3 bg-[#4BD5EE]/15 border border-[#4BD5EE]/40 text-[#4BD5EE] text-sm tracking-[0.15em] uppercase rounded-lg hover:bg-[#4BD5EE]/25 hover:border-[#4BD5EE]/60 transition-all duration-200"
+            onClick={() => handleSortChange('chronological')}
+            className={`glow-btn group px-7 py-3.5 text-sm tracking-[0.12em] uppercase rounded-lg transition-all duration-300 ${
+              sortMode === 'chronological'
+                ? 'bg-[#4BD5EE]/20 border-2 border-[#4BD5EE]/70 text-[#4BD5EE] shadow-[0_0_20px_rgba(75,213,238,0.2)]'
+                : 'bg-[#4BD5EE]/8 border border-[#4BD5EE]/30 text-[#4BD5EE]/60 hover:bg-[#4BD5EE]/15 hover:border-[#4BD5EE]/50 hover:text-[#4BD5EE]/80'
+            }`}
             style={{ '--btn-glow': 'rgba(75,213,238,0.3)' } as React.CSSProperties}
-            aria-label="Start the chronological journey"
+            aria-label="Sort by chronological story order"
           >
-            <Play className="w-4 h-4 inline mr-2 -mt-0.5 group-hover:scale-110 transition-transform" />
-            Start the Journey
+            <Clock className="w-4 h-4 inline mr-2 -mt-0.5 group-hover:scale-110 transition-transform" />
+            Chronological Order
           </button>
+
+          {/* Release Order */}
           <button
-            onClick={scrollToTimeline}
-            className="px-7 py-3 border border-white/10 text-white/45 text-sm tracking-[0.15em] uppercase rounded-lg hover:border-white/20 hover:text-white/65 hover:bg-white/[0.03] transition-all duration-200"
-            aria-label="View the timeline"
+            onClick={() => handleSortChange('release')}
+            className={`glow-btn group px-7 py-3.5 text-sm tracking-[0.12em] uppercase rounded-lg transition-all duration-300 ${
+              sortMode === 'release'
+                ? 'bg-[#E5C100]/20 border-2 border-[#E5C100]/70 text-[#E5C100] shadow-[0_0_20px_rgba(229,193,0,0.2)]'
+                : 'bg-[#E5C100]/8 border border-[#E5C100]/30 text-[#E5C100]/60 hover:bg-[#E5C100]/15 hover:border-[#E5C100]/50 hover:text-[#E5C100]/80'
+            }`}
+            style={{ '--btn-glow': 'rgba(229,193,0,0.3)' } as React.CSSProperties}
+            aria-label="Sort by theatrical release order"
           >
-            View Timeline
+            <Film className="w-4 h-4 inline mr-2 -mt-0.5 group-hover:scale-110 transition-transform" />
+            Release Order
           </button>
         </motion.div>
 
-        {/* Note */}
+        {/* Active mode description */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 1 }}
           className="text-white/20 text-xs tracking-wider italic mb-14"
         >
-          This order follows the story chronology, not the release dates.
+          {sortMode === 'chronological'
+            ? 'Following the story chronology — from the fall of the Republic to the rise of the First Order.'
+            : 'Ordered by theatrical release date — the way audiences experienced the saga.'}
         </motion.p>
 
         {/* Scroll indicator */}

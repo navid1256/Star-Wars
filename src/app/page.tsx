@@ -17,6 +17,8 @@ import ProgressIndicator from '@/components/sw/ProgressIndicator';
 import Footer from '@/components/sw/Footer';
 import type { Era } from '@/data/starWarsTimeline';
 
+export type SortMode = 'chronological' | 'release';
+
 const StarfieldBackground = dynamic(() => import('@/components/sw/StarfieldBackground'), { ssr: false });
 
 function useHasSeenIntro() {
@@ -33,6 +35,7 @@ export default function Home() {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<Era | 'All'>('All');
   const [beginnerMode, setBeginnerMode] = useState(false);
+  const [sortMode, setSortMode] = useState<SortMode>('chronological');
 
   const handleIntroComplete = useCallback(() => {
     localStorage.setItem('sw-chrono-intro-v3', 'true');
@@ -50,9 +53,9 @@ export default function Home() {
           <Navbar />
 
           <main className="relative z-10 flex-1">
-            <Hero />
+            <Hero sortMode={sortMode} onSortChange={setSortMode} />
 
-            {/* Why Chronological Order? */}
+            {/* Why This Order? */}
             <section className="py-16 px-4 max-w-3xl mx-auto text-center">
               <motion.h2
                 initial={{ opacity: 0, y: 15 }}
@@ -61,9 +64,9 @@ export default function Home() {
                 transition={{ type: 'spring', stiffness: 200, damping: 22 }}
                 className="text-white/70 text-xl md:text-2xl font-bold tracking-[0.08em] uppercase mb-3"
               >
-                Why Chronological Order?
+                {sortMode === 'chronological' ? 'Why Chronological Order?' : 'Why Release Order?'}
               </motion.h2>
-              <div className="ls-divider-blue max-w-[80px] mx-auto mb-5" />
+              <div className={`${sortMode === 'chronological' ? 'ls-divider-blue' : 'ls-divider-gold'} max-w-[80px] mx-auto mb-5`} />
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -71,12 +74,18 @@ export default function Home() {
                 transition={{ type: 'spring', stiffness: 200, damping: 22, delay: 0.1 }}
                 className="text-white/40 text-sm md:text-base leading-relaxed"
               >
-                Watching Star Wars in chronological story order lets you experience the saga as one
-                continuous narrative — from the final days of the Jedi Order and the Republic&apos;s fall,
-                through the dark reign of the Empire and the Rebellion that overthrew it, to the
-                fragile New Republic and the terrifying return of tyranny as the First Order. Every
-                twist, revelation, and character arc lands with maximum impact when you follow the
-                timeline as it unfolds within the story.
+                {sortMode === 'chronological'
+                  ? `Watching Star Wars in chronological story order lets you experience the saga as one
+                  continuous narrative — from the final days of the Jedi Order and the Republic's fall,
+                  through the dark reign of the Empire and the Rebellion that overthrew it, to the
+                  fragile New Republic and the terrifying return of tyranny as the First Order. Every
+                  twist, revelation, and character arc lands with maximum impact when you follow the
+                  timeline as it unfolds within the story.`
+                  : `Watching Star Wars in release order lets you experience the saga the way audiences
+                  first discovered it — beginning with the original trilogy that changed cinema forever,
+                  then the prequels that revealed the hidden past, and finally the sequels that brought
+                  the Skywalker saga to its conclusion. This order preserves the iconic reveals, the
+                  evolving filmmaking, and the cultural phenomenon as it unfolded in theaters.`}
               </motion.p>
             </section>
 
@@ -127,7 +136,7 @@ export default function Home() {
 
             {/* Timeline */}
             <div className="px-4 max-w-6xl mx-auto pb-20">
-              <Timeline filter={filter} search={search} beginnerMode={beginnerMode} />
+              <Timeline filter={filter} search={search} beginnerMode={beginnerMode} sortMode={sortMode} />
             </div>
 
             {/* Supplementary */}

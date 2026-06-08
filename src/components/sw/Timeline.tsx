@@ -1,16 +1,34 @@
 'use client';
 
+import { useMemo } from 'react';
 import { eraConfig, timelineData, type Era } from '@/data/starWarsTimeline';
 import TimelineCard from './TimelineCard';
+import type { SortMode } from '@/app/page';
 
 interface TimelineProps {
   filter: Era | 'All';
   search: string;
   beginnerMode: boolean;
+  sortMode: SortMode;
 }
 
-export default function Timeline({ filter, search, beginnerMode }: TimelineProps) {
-  const filtered = timelineData.filter((item) => {
+/** Extract the starting year from a releaseYear string like "1999", "2008–2020", "2019–present" */
+function parseStartYear(yearStr: string): number {
+  const match = yearStr.match(/(\d{4})/);
+  return match ? parseInt(match[1], 10) : 0;
+}
+
+export default function Timeline({ filter, search, beginnerMode, sortMode }: TimelineProps) {
+  const sorted = useMemo(() => {
+    const base = [...timelineData];
+    if (sortMode === 'release') {
+      base.sort((a, b) => parseStartYear(a.releaseYear) - parseStartYear(b.releaseYear));
+    }
+    // chronological is already the default order (by chronNumber)
+    return base;
+  }, [sortMode]);
+
+  const filtered = sorted.filter((item) => {
     if (filter !== 'All' && item.era !== filter) return false;
     if (search) {
       const q = search.toLowerCase();
@@ -25,7 +43,7 @@ export default function Timeline({ filter, search, beginnerMode }: TimelineProps
     return true;
   });
 
-  // Group by era
+  // Group by era (preserving the sorted order)
   const eraGroups: { era: Era; items: typeof filtered }[] = [];
   let currentEra: Era | null = null;
   for (const item of filtered) {
