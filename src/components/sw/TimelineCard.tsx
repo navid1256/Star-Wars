@@ -131,7 +131,7 @@ export default function TimelineCard({ item, beginnerMode, position, hasOverlapN
             </motion.div>
           ) : (
             /* Card is on RIGHT → poster goes in LEFT column */
-            <PosterImage item={item} cfg={cfg} isLeft={isLeft} targetHeight={cardHeight} />
+            <PosterImage item={item} cfg={cfg} isLeft={isLeft} targetHeight={cardHeight} onClick={() => setExpanded(!expanded)} />
           )}
         </div>
 
@@ -170,7 +170,7 @@ export default function TimelineCard({ item, beginnerMode, position, hasOverlapN
             </motion.div>
           ) : (
             /* Card is on LEFT → poster goes in RIGHT column */
-            <PosterImage item={item} cfg={cfg} isLeft={isLeft} targetHeight={cardHeight} />
+            <PosterImage item={item} cfg={cfg} isLeft={isLeft} targetHeight={cardHeight} onClick={() => setExpanded(!expanded)} />
           )}
         </div>
       </div>
@@ -224,11 +224,12 @@ function useTilt(intensity: number = 10) {
 }
 
 /* ─── Poster Image (Desktop - in opposite column, height matches card) ─── */
-function PosterImage({ item, cfg, isLeft, targetHeight }: {
+function PosterImage({ item, cfg, isLeft, targetHeight, onClick }: {
   item: TimelineItem;
   cfg: (typeof eraConfig)[keyof typeof eraConfig];
   isLeft: boolean;
   targetHeight: number;
+  onClick: () => void;
 }) {
   const tilt = useTilt(10);
 
@@ -250,6 +251,7 @@ function PosterImage({ item, cfg, isLeft, targetHeight }: {
       <div
         onMouseMove={tilt.handleMouseMove}
         onMouseLeave={tilt.handleMouseLeave}
+        onClick={onClick}
         className="relative overflow-hidden rounded-lg cursor-pointer"
         style={{
           transition: 'transform 0.15s ease-out',
