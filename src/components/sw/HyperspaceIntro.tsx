@@ -326,7 +326,7 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
                     transformOrigin: '50% 100%',
                   }}
                 >
-                  <div className="text-center max-w-2xl mx-auto">
+                  <div className="text-center max-w-4xl mx-auto">
                     {(() => {
                       const lines = CRAWL_TEXT.split('\n');
                       return lines.map((paragraph, i) => {
