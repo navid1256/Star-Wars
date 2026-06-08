@@ -17,6 +17,15 @@ Each entry provides context on why it matters at that point in the timeline, era
 
 May the Force be with you on your journey.`;
 
+// All poster paths for preloading during intro
+const POSTER_PATHS = [
+  '/posters/ep1.jpg', '/posters/ep2.jpg', '/posters/ep3.jpg', '/posters/ep4.jpg',
+  '/posters/ep5.jpg', '/posters/ep6.jpg', '/posters/ep7.jpg', '/posters/ep8.jpg',
+  '/posters/ep9.jpg', '/posters/solo.jpg', '/posters/rogue1.jpg', '/posters/cw.jpg',
+  '/posters/rebels.jpg', '/posters/andor.jpg', '/posters/ahsoka.jpg', '/posters/bb.jpg',
+  '/posters/bobafett.jpg', '/posters/mando.jpg', '/posters/obiwan.jpg',
+];
+
 export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
   const [phase, setPhase] = useState<'blue-text' | 'logo' | 'crawl' | 'fade-out' | 'done'>('blue-text');
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -25,6 +34,14 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
   const starsFrameRef = useRef<number>(0);
   const crawlFrameRef = useRef<number>(0);
   const crawlStartedRef = useRef(false);
+
+  // Preload all poster images during intro so they're cached when timeline appears
+  useEffect(() => {
+    POSTER_PATHS.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   const skip = useCallback(() => {
     cancelAnimationFrame(starsFrameRef.current);

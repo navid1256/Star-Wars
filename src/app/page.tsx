@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useSyncExternalStore } from 'react';
+import { useState, useCallback, useEffect, useSyncExternalStore } from 'react';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
@@ -29,6 +29,15 @@ function useHasSeenIntro() {
   );
 }
 
+// Preload poster images so they're ready when timeline renders
+const POSTER_PATHS = [
+  '/posters/ep1.jpg', '/posters/ep2.jpg', '/posters/ep3.jpg', '/posters/ep4.jpg',
+  '/posters/ep5.jpg', '/posters/ep6.jpg', '/posters/ep7.jpg', '/posters/ep8.jpg',
+  '/posters/ep9.jpg', '/posters/solo.jpg', '/posters/rogue1.jpg', '/posters/cw.jpg',
+  '/posters/rebels.jpg', '/posters/andor.jpg', '/posters/ahsoka.jpg', '/posters/bb.jpg',
+  '/posters/bobafett.jpg', '/posters/mando.jpg', '/posters/obiwan.jpg',
+];
+
 export default function Home() {
   const hasSeenIntro = useHasSeenIntro();
   const [introComplete, setIntroComplete] = useState(() => !!hasSeenIntro);
@@ -36,6 +45,16 @@ export default function Home() {
   const [filter, setFilter] = useState<Era | 'All'>('All');
   const [beginnerMode, setBeginnerMode] = useState(false);
   const [sortMode, setSortMode] = useState<SortMode>('chronological');
+
+  // If intro is already seen, preload posters immediately on mount
+  useEffect(() => {
+    if (introComplete) {
+      POSTER_PATHS.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+    }
+  }, [introComplete]);
 
   const handleIntroComplete = useCallback(() => {
     localStorage.setItem('sw-chrono-intro-v3', 'true');
