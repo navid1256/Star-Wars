@@ -3,7 +3,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Film, Tv, Clapperboard, AlertCircle, X } from 'lucide-react';
+import { ChevronDown, Film, Tv, Clapperboard, AlertCircle } from 'lucide-react';
 import { type TimelineItem, eraConfig } from '@/data/starWarsTimeline';
 
 interface TimelineCardProps {
@@ -69,22 +69,18 @@ const posterVariants = {
 
 export default function TimelineCard({ item, beginnerMode, position, hasOverlapNote }: TimelineCardProps) {
   const [expanded, setExpanded] = useState(false);
-  const [posterOpen, setPosterOpen] = useState(false);
   const cfg = eraConfig[item.era];
   const Icon = typeIcon[item.type];
   const isLeft = position % 2 === 0;
 
-  /* Measure the holo-card COLLAPSED height so the poster can match it (ignore expanded height) */
+  /* Measure the holo-card height so the poster can match it */
   const cardRef = useRef<HTMLDivElement>(null);
   const [cardHeight, setCardHeight] = useState<number>(0);
 
   useEffect(() => {
     const updateHeight = () => {
       if (cardRef.current) {
-        const h = cardRef.current.getBoundingClientRect().height;
-        if (!expanded) {
-          setCardHeight(h);
-        }
+        setCardHeight(cardRef.current.getBoundingClientRect().height);
       }
     };
     updateHeight();
@@ -92,17 +88,7 @@ export default function TimelineCard({ item, beginnerMode, position, hasOverlapN
     const observer = new ResizeObserver(updateHeight);
     if (cardRef.current) observer.observe(cardRef.current);
     return () => observer.disconnect();
-  }, [expanded]);
-
-  // Close poster lightbox on Escape
-  useEffect(() => {
-    if (!posterOpen) return;
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setPosterOpen(false);
-    };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, [posterOpen]);
+  }, []);
 
   return (
     <div className="relative" id={`card-${item.chronNumber}`}>
@@ -145,7 +131,7 @@ export default function TimelineCard({ item, beginnerMode, position, hasOverlapN
             </motion.div>
           ) : (
             /* Card is on RIGHT → poster goes in LEFT column */
-            <PosterImage item={item} cfg={cfg} isLeft={isLeft} targetHeight={cardHeight} onClick={() => setPosterOpen(true)} />
+            <PosterImage item={item} cfg={cfg} isLeft={isLeft} targetHeight={cardHeight} onClick={() => setExpanded(!expanded)} />
           )}
         </div>
 
@@ -184,7 +170,7 @@ export default function TimelineCard({ item, beginnerMode, position, hasOverlapN
             </motion.div>
           ) : (
             /* Card is on LEFT → poster goes in RIGHT column */
-            <PosterImage item={item} cfg={cfg} isLeft={isLeft} targetHeight={cardHeight} onClick={() => setPosterOpen(true)} />
+            <PosterImage item={item} cfg={cfg} isLeft={isLeft} targetHeight={cardHeight} onClick={() => setExpanded(!expanded)} />
           )}
         </div>
       </div>
@@ -208,86 +194,11 @@ export default function TimelineCard({ item, beginnerMode, position, hasOverlapN
         >
           {/* Mobile: poster inside card on the right */}
           <div className="relative">
-            <div onClick={(e) => { e.stopPropagation(); setPosterOpen(true); }}>
-              <PosterImageInline item={item} cfg={cfg} />
-            </div>
+            <PosterImageInline item={item} cfg={cfg} />
             <CardTextContent item={item} beginnerMode={beginnerMode} expanded={expanded} cfg={cfg} Icon={Icon} />
           </div>
         </motion.div>
       </div>
-
-      {/* ── POSTER LIGHTBOX ── */}
-      <AnimatePresence>
-        {posterOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 backdrop-blur-sm cursor-pointer"
-            onClick={() => setPosterOpen(false)}
-          >
-            {/* Close button */}
-            <motion.button
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ delay: 0.1 }}
-              className="absolute top-5 right-5 z-[110] p-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 text-white/60 hover:text-white transition-all cursor-pointer"
-              onClick={() => setPosterOpen(false)}
-              aria-label="Close poster"
-            >
-              <X className="w-5 h-5" />
-            </motion.button>
-
-            {/* Poster image */}
-            <motion.div
-              initial={{ scale: 0.7, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.8, opacity: 0, y: 10 }}
-              transition={{ type: 'spring', stiffness: 260, damping: 25 }}
-              className="relative cursor-default"
-              style={{ maxHeight: '85vh', maxWidth: '90vw' }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div
-                className="relative overflow-hidden rounded-xl"
-                style={{
-                  border: `2px solid ${cfg.color}40`,
-                  boxShadow: `0 0 40px ${cfg.glow}, 0 0 80px ${cfg.glow}30, 0 20px 60px rgba(0,0,0,0.6)`,
-                  aspectRatio: '768/1344',
-                  height: '85vh',
-                  maxWidth: '90vw',
-                }}
-              >
-                <Image
-                  src={item.poster}
-                  alt={`${item.title} poster`}
-                  fill
-                  className="object-cover"
-                  sizes="90vw"
-                  unoptimized
-                />
-                <div
-                  className="absolute inset-0 z-[1] pointer-events-none"
-                  style={{ boxShadow: 'inset 0 0 60px rgba(0,0,0,0.4)' }}
-                />
-                <div
-                  className="absolute bottom-0 left-0 right-0 h-1/4 z-[1] pointer-events-none"
-                  style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)' }}
-                />
-                {/* Title overlay */}
-                <div className="absolute bottom-0 left-0 right-0 z-[2] p-5">
-                  <h3 className="text-white text-lg font-bold tracking-wide" style={{ textShadow: `0 0 20px ${cfg.glow}` }}>
-                    {item.title}
-                  </h3>
-                  <p className="text-white/50 text-xs mt-1">{item.releaseYear} · {item.type}</p>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
@@ -342,7 +253,7 @@ function PosterImage({ item, cfg, isLeft, targetHeight, onClick }: {
         onClick={onClick}
         className="relative overflow-hidden rounded-lg cursor-pointer"
         style={{
-          transition: 'transform 0.15s ease-out',
+          transition: 'transform 0.15s ease-out, width 0.35s ease, height 0.35s ease',
           border: `1.5px solid ${cfg.color}30`,
           aspectRatio: '768/1344',
           width: posterWidth ? `${posterWidth}px` : '120px',
