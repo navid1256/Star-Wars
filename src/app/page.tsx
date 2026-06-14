@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect, useSyncExternalStore } from 'react';
+import { useState, useCallback, useSyncExternalStore } from 'react';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
@@ -15,7 +15,6 @@ import Timeline from '@/components/sw/Timeline';
 import SupplementaryTitles from '@/components/sw/SupplementaryTitles';
 import ProgressIndicator from '@/components/sw/ProgressIndicator';
 import Footer from '@/components/sw/Footer';
-import { POSTER_PATHS } from '@/lib/sw-constants';
 import type { SortMode } from '@/lib/sw-types';
 import type { Era } from '@/data/starWarsTimeline';
 
@@ -38,16 +37,6 @@ export default function Home() {
   const [filter, setFilter] = useState<Era | 'All'>('All');
   const [beginnerMode, setBeginnerMode] = useState(false);
   const [sortMode, setSortMode] = useState<SortMode>('chronological');
-
-  // Preload posters when intro is already seen
-  useEffect(() => {
-    if (introComplete) {
-      POSTER_PATHS.forEach((src) => {
-        const img = new Image();
-        img.src = src;
-      });
-    }
-  }, [introComplete]);
 
   const handleIntroComplete = useCallback(() => {
     localStorage.setItem(INTRO_STORAGE_KEY, 'true');

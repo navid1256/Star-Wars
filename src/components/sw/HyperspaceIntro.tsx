@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { POSTER_PATHS, INTRO_TIMING, STARFIELD_CONFIG, CRAWL_CONFIG } from '@/lib/sw-constants';
+import { INTRO_TIMING, STARFIELD_CONFIG, CRAWL_CONFIG } from '@/lib/sw-constants';
 
 /* ─── Types ─── */
 type IntroPhase = 'blue-text' | 'logo' | 'crawl' | 'fade-out' | 'done';
@@ -33,14 +33,6 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
   const starsFrameRef = useRef<number>(0);
   const crawlFrameRef = useRef<number>(0);
   const crawlStartedRef = useRef(false);
-
-  // Preload poster images during intro
-  useEffect(() => {
-    POSTER_PATHS.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, []);
 
   const skip = useCallback(() => {
     cancelAnimationFrame(starsFrameRef.current);

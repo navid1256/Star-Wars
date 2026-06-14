@@ -252,7 +252,6 @@ function PosterImage({ item, cfg, isLeft, targetHeight, onClick }: PosterImagePr
           fill
           className="object-cover"
           sizes={`${posterWidth || 120}px`}
-          unoptimized
         />
         <PosterBottomGradient />
       </div>
@@ -291,7 +290,6 @@ function PosterImageInline({ item, cfg }: PosterImageInlineProps) {
           fill
           className="object-cover"
           sizes="70px"
-          unoptimized
         />
       </div>
     </motion.div>
