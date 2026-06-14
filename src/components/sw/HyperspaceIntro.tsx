@@ -334,19 +334,19 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
                     transformOrigin: '50% 100%',
                   }}
                 >
-                  <div className="text-center max-w-7xl mx-auto">
+                  <div className="text-justify max-w-7xl mx-auto">
                     {(() => {
                       const lines = CRAWL_TEXT.split('\n');
                       return lines.map((paragraph, i) => {
                         const isEmpty = paragraph.trim() === '';
-                        if (isEmpty) return <div key={i} className="h-6" />;
+                        if (isEmpty) return <div key={i} className="h-8" />;
                         return (
                           <p
                             key={i}
-                            className="text-[#FFE81F] text-4xl sm:text-5xl md:text-6xl font-light leading-relaxed mb-4 tracking-wide"
+                            className="text-[#FFE81F] text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.4] mb-5 tracking-[0.12em] uppercase"
                             style={{
-                              textShadow: '0 0 14px rgba(255,232,31,0.45)',
-                              fontFamily: '"Segoe UI", system-ui, sans-serif',
+                              textShadow: '0 0 18px rgba(255,232,31,0.55), 0 0 40px rgba(255,232,31,0.2)',
+                              fontFamily: '"Franklin Gothic Medium", "Arial Narrow", "Segoe UI", system-ui, sans-serif',
                             }}
                           >
                             {paragraph}
