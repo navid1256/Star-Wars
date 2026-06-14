@@ -246,7 +246,6 @@ function PosterImage({ item, cfg, isLeft, targetHeight, onClick }: {
       whileInView="visible"
       viewport={{ once: true, margin: '-20px' }}
       className="flex-shrink-0"
-      style={{ marginTop: '9px' }}
     >
       <div
         onMouseMove={tilt.handleMouseMove}
