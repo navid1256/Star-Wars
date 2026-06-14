@@ -253,7 +253,7 @@ function PosterImage({ item, cfg, isLeft, targetHeight, onClick }: {
         onClick={onClick}
         className="relative overflow-hidden rounded-lg cursor-pointer"
         style={{
-          transition: 'transform 0.15s ease-out, width 0.35s ease, height 0.35s ease',
+          transition: 'transform 0.15s ease-out',
           border: `1.5px solid ${cfg.color}30`,
           aspectRatio: '768/1344',
           width: posterWidth ? `${posterWidth}px` : '120px',
