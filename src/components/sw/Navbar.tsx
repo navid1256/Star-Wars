@@ -49,9 +49,7 @@ export default function Navbar() {
           className="flex items-center gap-2 group cursor-pointer"
           aria-label="Scroll to top"
         >
-          <div className="bg-[#050510] rounded-sm">
-            <Image src="/logo.png" alt="Star Wars" width={28} height={28} />
-          </div>
+          <Image src="/logo.png" alt="Star Wars" width={28} height={28} />
           <span className="text-[#4BD5EE]/80 font-black tracking-[0.18em] text-xs md:text-sm group-hover:text-[#4BD5EE] transition-colors">
             SW CHRONO
           </span>
