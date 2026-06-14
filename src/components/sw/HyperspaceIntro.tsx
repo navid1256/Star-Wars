@@ -9,9 +9,7 @@ interface HyperspaceIntroProps {
 
 const CRAWL_TEXT = `It is a time of endless choices. Across the galaxy, countless viewers struggle to find the right path through the Star Wars saga.
 
-This interactive timeline is your guide. Nineteen titles across five eras, arranged in the exact order events happen — so you can experience every twist and revelation exactly as intended.
-
-From the fall of the Jedi to the rise of the Empire, through the Rebellion's fight, to the New Republic and the terrifying return of the First Order — the complete story awaits.
+This interactive timeline is your guide — nineteen titles across five eras, arranged in the exact order events happen.
 
 May the Force be with you.`;
 
@@ -336,7 +334,7 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
                     transformOrigin: '50% 100%',
                   }}
                 >
-                  <div className="text-center max-w-6xl mx-auto">
+                  <div className="text-center max-w-7xl mx-auto">
                     {(() => {
                       const lines = CRAWL_TEXT.split('\n');
                       return lines.map((paragraph, i) => {
@@ -345,7 +343,7 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
                         return (
                           <p
                             key={i}
-                            className="text-[#FFE81F] text-3xl sm:text-4xl md:text-5xl font-light leading-relaxed mb-4 tracking-wide"
+                            className="text-[#FFE81F] text-4xl sm:text-5xl md:text-6xl font-light leading-relaxed mb-4 tracking-wide"
                             style={{
                               textShadow: '0 0 14px rgba(255,232,31,0.45)',
                               fontFamily: '"Segoe UI", system-ui, sans-serif',

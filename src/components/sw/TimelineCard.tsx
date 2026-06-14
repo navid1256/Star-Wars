@@ -271,6 +271,7 @@ function PosterImage({ item, cfg, isLeft, targetHeight, onClick }: {
           fill
           className="object-cover"
           sizes={`${posterWidth || 120}px`}
+          unoptimized
         />
         <div
           className="absolute bottom-0 left-0 right-0 h-1/3 z-[1] pointer-events-none rounded-b-lg"
@@ -316,6 +317,7 @@ function PosterImageInline({ item, cfg }: {
           fill
           className="object-cover"
           sizes="70px"
+          unoptimized
         />
 
       </div>
