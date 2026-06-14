@@ -151,15 +151,19 @@ function SortButton({ mode, isActive, color, glowColor, icon, label, onClick }: 
 }) {
   const rgb = color === '#4BD5EE' ? '75,213,238' : '255,45,45';
 
+  const activeStyle: React.CSSProperties = isActive
+    ? { backgroundColor: `rgba(${rgb},0.18)`, borderColor: `rgba(${rgb},0.8)`, color, boxShadow: `0 0 24px rgba(${rgb},0.3), 0 0 48px rgba(${rgb},0.1)` }
+    : {};
+
+  const inactiveStyle: React.CSSProperties = !isActive
+    ? { backgroundColor: `rgba(${rgb},0.06)`, borderColor: `rgba(${rgb},0.25)`, color: `rgba(${rgb},0.5)` }
+    : {};
+
   return (
     <button
       onClick={onClick}
-      className={`glow-btn group relative px-7 py-3.5 text-sm tracking-[0.14em] uppercase rounded-lg cursor-pointer transition-all duration-300 overflow-hidden ${
-        isActive
-          ? `bg-[${color}]/20 border-2 border-[${color}]/80 text-[${color}] shadow-[0_0_24px_rgba(${rgb},0.3),0_0_48px_rgba(${rgb},0.1)]`
-          : `bg-[${color}]/6 border border-[${color}]/25 text-[${color}]/50 hover:bg-[${color}]/12 hover:border-[${color}]/45 hover:text-[${color}]/75`
-      }`}
-      style={{ '--btn-glow': glowColor } as React.CSSProperties}
+      className={`glow-btn group relative px-7 py-3.5 text-sm tracking-[0.14em] uppercase rounded-lg cursor-pointer transition-all duration-300 overflow-hidden border ${isActive ? 'border-2' : 'border'}`}
+      style={{ '--btn-glow': glowColor, ...activeStyle, ...inactiveStyle } as React.CSSProperties}
       aria-label={`Sort by ${mode === 'chronological' ? 'chronological story' : 'theatrical release'} order`}
     >
       {isActive && (
