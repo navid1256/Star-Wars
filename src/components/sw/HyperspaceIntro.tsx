@@ -7,15 +7,13 @@ interface HyperspaceIntroProps {
   onComplete: () => void;
 }
 
-const CRAWL_TEXT = `It is a time of endless choices. Across the galaxy, countless viewers struggle to find the right path through the Star Wars saga — unsure where to begin, what to watch next, or how the story truly unfolds.
+const CRAWL_TEXT = `It is a time of endless choices. Across the galaxy, countless viewers struggle to find the right path through the Star Wars saga.
 
-This interactive timeline is your guide. Nineteen titles across five eras, arranged in the exact order events happen within the galaxy — so you can experience every twist, revelation, and character arc exactly as intended.
+This interactive timeline is your guide. Nineteen titles across five eras, arranged in the exact order events happen — so you can experience every twist and revelation exactly as intended.
 
-No more guessing which film comes next. No more accidental spoilers from watching out of sequence. From the fall of the Jedi and the rise of the Empire, through the Rebellion's fight for freedom, to the fragile peace of the New Republic and the terrifying return of the First Order — the complete story awaits.
+From the fall of the Jedi to the rise of the Empire, through the Rebellion's fight, to the New Republic and the terrifying return of the First Order — the complete story awaits.
 
-Each entry provides context on why it matters at that point in the timeline, era placement, and viewing guidance — whether you are a first-time viewer or a lifelong fan rediscovering the saga.
-
-May the Force be with you on your journey.`;
+May the Force be with you.`;
 
 // All poster paths for preloading during intro
 const POSTER_PATHS = [
@@ -338,7 +336,7 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
                     transformOrigin: '50% 100%',
                   }}
                 >
-                  <div className="text-center max-w-4xl mx-auto">
+                  <div className="text-center max-w-6xl mx-auto">
                     {(() => {
                       const lines = CRAWL_TEXT.split('\n');
                       return lines.map((paragraph, i) => {
@@ -347,7 +345,7 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
                         return (
                           <p
                             key={i}
-                            className="text-[#FFE81F] text-2xl sm:text-3xl md:text-4xl font-light leading-relaxed mb-4 tracking-wide"
+                            className="text-[#FFE81F] text-3xl sm:text-4xl md:text-5xl font-light leading-relaxed mb-4 tracking-wide"
                             style={{
                               textShadow: '0 0 14px rgba(255,232,31,0.45)',
                               fontFamily: '"Segoe UI", system-ui, sans-serif',
