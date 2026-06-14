@@ -73,14 +73,20 @@ export default function TimelineCard({ item, beginnerMode, position, hasOverlapN
   const Icon = typeIcon[item.type];
   const isLeft = position % 2 === 0;
 
-  /* Measure the holo-card height so the poster can match it */
+  /* Measure the holo-card COLLAPSED height so the poster can match it (ignore expanded height) */
   const cardRef = useRef<HTMLDivElement>(null);
   const [cardHeight, setCardHeight] = useState<number>(0);
+  const expandedHeightRef = useRef<number>(0);
 
   useEffect(() => {
     const updateHeight = () => {
       if (cardRef.current) {
-        setCardHeight(cardRef.current.getBoundingClientRect().height);
+        const h = cardRef.current.getBoundingClientRect().height;
+        if (!expanded) {
+          // Only update poster height when card is collapsed
+          setCardHeight(h);
+          expandedHeightRef.current = 0;
+        }
       }
     };
     updateHeight();
@@ -88,7 +94,7 @@ export default function TimelineCard({ item, beginnerMode, position, hasOverlapN
     const observer = new ResizeObserver(updateHeight);
     if (cardRef.current) observer.observe(cardRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [expanded]);
 
   return (
     <div className="relative" id={`card-${item.chronNumber}`}>
