@@ -2,20 +2,14 @@
 
 import { motion } from 'framer-motion';
 import { supplementaryTitles } from '@/data/starWarsTimeline';
-import { Film, Tv, Clapperboard } from 'lucide-react';
-
-const typeIcon: Record<string, React.ComponentType<{ className?: string }>> = {
-  Movie: Film,
-  'TV Series': Tv,
-  'Animated TV Series': Clapperboard,
-};
+import { typeIcon } from '@/lib/sw-constants';
 
 export default function SupplementaryTitles() {
   return (
     <section id="supplementary" className="py-16">
       <div className="text-center mb-10">
         <h2 className="text-white/50 text-xl md:text-2xl font-bold tracking-[0.1em] uppercase mb-2">
-          Supplementary & Expanded Titles
+          Supplementary &amp; Expanded Titles
         </h2>
         <div className="ls-divider-blue max-w-[100px] mx-auto mb-3" />
         <p className="text-white/25 text-xs md:text-sm tracking-wider max-w-lg mx-auto">
@@ -25,7 +19,7 @@ export default function SupplementaryTitles() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-4xl mx-auto">
         {supplementaryTitles.map((item, i) => {
-          const Icon = typeIcon[item.type] || Film;
+          const Icon = typeIcon[item.type] ?? typeIcon.Movie;
           return (
             <motion.div
               key={item.title}
