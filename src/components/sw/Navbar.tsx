@@ -55,7 +55,7 @@ export default function Navbar() {
           </span>
         </button>
 
-        <div className="hidden lg:flex items-center gap-1">
+        <div className="hidden lg:flex items-center gap-1 mr-[134px]">
           {navItems.map((item) => (
             <button
               key={item.href}
