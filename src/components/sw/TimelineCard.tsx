@@ -251,7 +251,8 @@ function PosterImage({ item, cfg, isLeft, targetHeight, onClick }: PosterImagePr
           alt={`${item.title} poster`}
           fill
           className="object-cover"
-          sizes="(max-width: 768px) 70px, 280px"
+          sizes="(max-width: 768px) 150px, 600px"
+          quality={90}
         />
         <PosterBottomGradient />
       </div>
@@ -289,8 +290,8 @@ function PosterImageInline({ item, cfg }: PosterImageInlineProps) {
           alt={`${item.title} poster`}
           fill
           className="object-cover"
-          sizes="70px"
-          quality={85}
+          sizes="150px"
+          quality={90}
         />
       </div>
     </motion.div>
