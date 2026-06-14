@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
@@ -48,7 +49,7 @@ export default function Navbar() {
           className="flex items-center gap-2 group cursor-pointer"
           aria-label="Scroll to top"
         >
-          <div className="w-2 h-2 rounded-full bg-[#4BD5EE] shadow-[0_0_6px_rgba(75,213,238,0.5)] group-hover:shadow-[0_0_12px_rgba(75,213,238,0.7)] transition-shadow" />
+          <Image src="/logo.png" alt="Star Wars" width={28} height={28} className="rounded-sm" />
           <span className="text-[#4BD5EE]/80 font-black tracking-[0.18em] text-xs md:text-sm group-hover:text-[#4BD5EE] transition-colors">
             SW CHRONO
           </span>
