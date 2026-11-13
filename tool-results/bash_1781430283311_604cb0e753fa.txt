@@ -1,0 +1,755 @@
+- main
+  - generic
+    - generic
+    - generic
+    - generic
+      - StaticText "GALACTIC ARCHIVE"
+      - heading "Star Wars Viewing Order" [level=1, ref=e14]
+        - StaticText "Star Wars"
+        - StaticText "Viewing Order"
+      - paragraph
+        - StaticText "Experience the complete Star Wars saga in your preferred order — follow the story as it unfolds in-universe, or watch it the way audiences first discovered it."
+      - button "Sort by chronological story order" [ref=e15]
+        - StaticText "CHRONOLOGICAL ORDER"
+      - button "Sort by theatrical release order" [ref=e16]
+        - StaticText "RELEASE ORDER"
+      - paragraph
+        - StaticText "Following the story chronology — from the fall of the Republic to the rise of the First Order."
+      - StaticText "SCROLL"
+  - generic
+    - heading "WHY CHRONOLOGICAL ORDER?" [level=2, ref=e11]
+    - paragraph
+      - StaticText "Watching Star Wars in chronological story order lets you experience the saga as one continuous narrative — from the final days of the Jedi Order and the Republic's fall, through the dark reign of the Empire and the Rebellion that overthrew it, to the fragile New Republic and the terrifying return of tyranny as the First Order. Every twist, revelation, and character arc lands with maximum impact when you follow the timeline as it unfolds within the story."
+  - heading "New to Star Wars?" [level=3, ref=e17]
+  - paragraph
+    - StaticText "This chronological order is the best way to experience the full saga for the first time. Toggle "
+    - strong
+      - StaticText "Beginner Mode"
+    - StaticText " below for simplified summaries and spoiler-light descriptions. Every entry includes a “Why Watch It Here” explanation to guide your journey."
+  - StaticText "19 Entries"
+  - StaticText "5 Eras"
+  - StaticText "Movies + Series"
+  - generic
+    - StaticText "FALL OF THE JEDI"
+    - StaticText "REIGN OF THE EMPIRE"
+    - StaticText "AGE OF REBELLION"
+    - StaticText "THE NEW REPUBLIC"
+    - StaticText "RISE OF THE FIRST ORDER"
+    - textbox "Search timeline entries" [ref=e18]
+    - button "Enable beginner mode" [ref=e12]
+      - StaticText "BEGINNER MODE"
+    - group "Filter by era"
+      - button "ALL ERAS" [ref=e19]
+      - button "FALL OF THE JEDI" [ref=e20]
+      - button "REIGN OF THE EMPIRE" [ref=e21]
+      - button "AGE OF REBELLION" [ref=e22]
+      - button "THE NEW REPUBLIC" [ref=e23]
+      - button "RISE OF THE FIRST ORDER" [ref=e24]
+  - generic
+    - generic
+      - heading "FALL OF THE JEDI" [level=2, ref=e25]
+      - paragraph
+        - StaticText "The final days of the Jedi Order and the Republic's descent into war and tyranny"
+    - generic
+      - generic [ref=e37] clickable [cursor:pointer, onclick]
+        - StaticText "MOVIE"
+        - StaticText "1999"
+        - heading "Episode I: The Phantom Menace" [level=3, ref=e76]
+        - StaticText "FALL OF THE JEDI"
+        - StaticText "prequel"
+        - StaticText "origin"
+        - StaticText "anakin"
+        - StaticText "sith-reveal"
+        - paragraph
+        - heading "WHY WATCH IT HERE" [level=4, ref=e95]
+        - paragraph
+        - heading "BEGINNER-FRIENDLY SUMMARY" [level=4, ref=e96]
+        - paragraph
+        - heading "CONTINUITY NOTE" [level=4, ref=e97]
+        - paragraph
+      - generic
+      - generic [ref=e38] clickable [cursor:pointer, onclick]
+        - image "Episode I: The Phantom Menace poster"
+      - generic [ref=e39] clickable [cursor:pointer, onclick]
+        - image "Episode II: Attack of the Clones poster"
+      - generic
+      - generic [ref=e40] clickable [cursor:pointer, onclick]
+        - StaticText "MOVIE"
+        - StaticText "2002"
+        - heading "Episode II: Attack of the Clones" [level=3, ref=e77]
+        - StaticText "FALL OF THE JEDI"
+        - StaticText "prequel"
+        - StaticText "romance"
+        - StaticText "clone-army"
+        - StaticText "count-dooku"
+        - paragraph
+      - generic [ref=e41] clickable [cursor:pointer, onclick]
+        - StaticText "ANIMATED TV SERIES"
+        - StaticText "2008–2020"
+        - heading "Star Wars: The Clone Wars" [level=3, ref=e78]
+        - StaticText "FALL OF THE JEDI"
+        - StaticText "prequel"
+        - StaticText "animated"
+        - StaticText "clone-wars"
+        - StaticText "ahsoka"
+        - paragraph
+      - generic
+      - generic [ref=e42] clickable [cursor:pointer, onclick]
+        - image "Star Wars: The Clone Wars poster"
+      - generic [ref=e43] clickable [cursor:pointer, onclick]
+        - image "Episode III: Revenge of the Sith poster"
+      - generic
+      - generic [ref=e44] clickable [cursor:pointer, onclick]
+        - StaticText "MOVIE"
+        - StaticText "2005"
+        - heading "Episode III: Revenge of the Sith" [level=3, ref=e79]
+        - StaticText "FALL OF THE JEDI"
+        - StaticText "prequel"
+        - StaticText "order-66"
+        - StaticText "vader-birth"
+        - StaticText "fall-of-republic"
+        - paragraph
+  - generic
+    - generic
+      - heading "REIGN OF THE EMPIRE" [level=2, ref=e26]
+      - paragraph
+        - StaticText "The dark ascendance of the Galactic Empire and the survivors who resist in the shadows"
+    - generic
+      - generic [ref=e45] clickable [cursor:pointer, onclick]
+        - StaticText "ANIMATED TV SERIES"
+        - StaticText "2021–2024"
+        - heading "The Bad Batch" [level=3, ref=e80]
+        - StaticText "REIGN OF THE EMPIRE"
+        - StaticText "animated"
+        - StaticText "clone-force"
+        - StaticText "post-order-66"
+        - StaticText "early-empire"
+        - paragraph
+      - generic
+      - generic [ref=e46] clickable [cursor:pointer, onclick]
+        - image "The Bad Batch poster"
+      - generic [ref=e47] clickable [cursor:pointer, onclick]
+        - image "Solo: A Star Wars Story poster"
+      - generic
+      - generic [ref=e48] clickable [cursor:pointer, onclick]
+        - StaticText "MOVIE"
+        - StaticText "2018"
+        - heading "Solo: A Star Wars Story" [level=3, ref=e81]
+        - StaticText "REIGN OF THE EMPIRE"
+        - StaticText "spin-off"
+        - StaticText "han-solo"
+        - StaticText "underworld"
+        - StaticText "kessel"
+        - paragraph
+      - generic [ref=e49] clickable [cursor:pointer, onclick]
+        - StaticText "TV SERIES"
+        - StaticText "2022"
+        - heading "Obi-Wan Kenobi" [level=3, ref=e82]
+        - StaticText "REIGN OF THE EMPIRE"
+        - StaticText "obi-wan"
+        - StaticText "vader"
+        - StaticText "twin-suns"
+        - StaticText "inquisitors"
+        - paragraph
+      - generic
+      - generic [ref=e50] clickable [cursor:pointer, onclick]
+        - image "Obi-Wan Kenobi poster"
+  - generic
+    - generic
+      - heading "AGE OF REBELLION" [level=2, ref=e27]
+      - paragraph
+        - StaticText "The spark of hope that ignites the Rebel Alliance and topples the Empire"
+    - generic
+      - generic [ref=e51] clickable [cursor:pointer, onclick]
+        - image "Star Wars Rebels poster"
+      - generic
+      - generic [ref=e52] clickable [cursor:pointer, onclick]
+        - StaticText "ANIMATED TV SERIES"
+        - StaticText "2014–2018"
+        - heading "Star Wars Rebels" [level=3, ref=e83]
+        - StaticText "AGE OF REBELLION"
+        - StaticText "animated"
+        - StaticText "rebellion"
+        - StaticText "ahsoka"
+        - StaticText "thrawn"
+        - paragraph
+      - generic
+        - paragraph
+        - generic [ref=e53] clickable [cursor:pointer, onclick]
+          - heading "Andor" [level=3, ref=e84]
+        - generic
+        - generic [ref=e54] clickable [cursor:pointer, onclick]
+      - generic [ref=e55] clickable [cursor:pointer, onclick]
+        - image "Rogue One: A Star Wars Story poster"
+      - generic
+      - generic [ref=e56] clickable [cursor:pointer, onclick]
+        - StaticText "MOVIE"
+        - StaticText "2016"
+        - heading "Rogue One: A Star Wars Story" [level=3, ref=e85]
+        - StaticText "AGE OF REBELLION"
+        - StaticText "spin-off"
+        - StaticText "death-star-plans"
+        - StaticText "sacrifice"
+        - StaticText "scarif"
+        - paragraph
+      - generic [ref=e57] clickable [cursor:pointer, onclick]
+        - StaticText "MOVIE"
+        - StaticText "1977"
+        - heading "Episode IV: A New Hope" [level=3, ref=e86]
+        - StaticText "AGE OF REBELLION"
+        - StaticText "original"
+        - StaticText "luke"
+        - StaticText "han"
+        - StaticText "death-star"
+        - paragraph
+      - generic
+      - generic [ref=e58] clickable [cursor:pointer, onclick]
+        - image "Episode IV: A New Hope poster"
+      - generic [ref=e59] clickable [cursor:pointer, onclick]
+        - image "Episode V: The Empire Strikes Back poster"
+      - generic
+      - generic [ref=e60] clickable [cursor:pointer, onclick]
+        - StaticText "MOVIE"
+        - StaticText "1980"
+        - heading "Episode V: The Empire Strikes Back" [level=3, ref=e87]
+        - StaticText "AGE OF REBELLION"
+        - StaticText "original"
+        - StaticText "vader-reveal"
+        - StaticText "yoda"
+        - StaticText "cloud-city"
+        - paragraph
+      - generic [ref=e61] clickable [cursor:pointer, onclick]
+        - StaticText "MOVIE"
+        - StaticText "1983"
+        - heading "Episode VI: Return of the Jedi" [level=3, ref=e88]
+        - StaticText "AGE OF REBELLION"
+        - StaticText "original"
+        - StaticText "vader-redemption"
+        - StaticText "palpatine"
+        - StaticText "endor"
+        - paragraph
+      - generic
+      - generic [ref=e62] clickable [cursor:pointer, onclick]
+        - image "Episode VI: Return of the Jedi poster"
+  - generic
+    - generic
+      - heading "THE NEW REPUBLIC" [level=2, ref=e28]
+      - paragraph
+        - StaticText "A fragile new era of peace, scattered threats, and the way of the Mandalorian"
+    - generic
+      - generic [ref=e63] clickable [cursor:pointer, onclick]
+        - image "The Mandalorian poster"
+      - generic
+      - generic [ref=e64] clickable [cursor:pointer, onclick]
+        - StaticText "TV SERIES"
+        - StaticText "2019–present"
+        - heading "The Mandalorian" [level=3, ref=e89]
+        - StaticText "THE NEW REPUBLIC"
+        - StaticText "mandalorian"
+        - StaticText "grogu"
+        - StaticText "boba"
+        - StaticText "new-republic"
+        - paragraph
+          - StaticText "In the lawless aftermath of the Empire's fall, a lone Mandalorian bounty hunter known as Din Djarin discovers an unexpected prize: a Force-sensitive child of the same mysterious species as Yoda. Protecting this child — Grogu — takes Din on a journey across the galaxy's outer rim, forging unlikely alliances, confronting Imperial remnants, and discovering what it means to be more than a warrior."
+      - generic [ref=e65] clickable [cursor:pointer, onclick]
+        - StaticText "TV SERIES"
+        - StaticText "2021–2022"
+        - heading "The Book of Boba Fett" [level=3, ref=e90]
+        - StaticText "THE NEW REPUBLIC"
+        - StaticText "boba-fett"
+        - StaticText "tatooine"
+        - StaticText "underworld"
+        - StaticText "mandalorian"
+        - paragraph
+      - generic
+      - generic [ref=e66] clickable [cursor:pointer, onclick]
+        - image "The Book of Boba Fett poster"
+      - generic [ref=e67] clickable [cursor:pointer, onclick]
+        - image "Ahsoka poster"
+      - generic
+      - generic [ref=e68] clickable [cursor:pointer, onclick]
+        - StaticText "TV SERIES"
+        - StaticText "2023"
+        - heading "Ahsoka" [level=3, ref=e91]
+        - StaticText "THE NEW REPUBLIC"
+        - StaticText "ahsoka"
+        - StaticText "thrawn"
+        - StaticText "ezra"
+        - StaticText "world-between-worlds"
+        - paragraph
+  - generic
+    - generic
+      - heading "RISE OF THE FIRST ORDER" [level=2, ref=e29]
+      - paragraph
+        - StaticText "The Empire's ghost returns as the First Order, and the last Jedi must rise again"
+    - generic
+      - generic [ref=e69] clickable [cursor:pointer, onclick]
+        - StaticText "MOVIE"
+        - StaticText "2015"
+        - heading "Episode VII: The Force Awakens" [level=3, ref=e92]
+        - StaticText "RISE OF THE FIRST ORDER"
+        - StaticText "sequel"
+        - StaticText "rey"
+        - StaticText "kylo"
+        - StaticText "first-order"
+        - paragraph
+      - generic
+      - generic [ref=e70] clickable [cursor:pointer, onclick]
+        - image "Episode VII: The Force Awakens poster"
+      - generic [ref=e71] clickable [cursor:pointer, onclick]
+        - image "Episode VIII: The Last Jedi poster"
+      - generic
+      - generic [ref=e72] clickable [cursor:pointer, onclick]
+        - StaticText "MOVIE"
+        - StaticText "2017"
+        - heading "Episode VIII: The Last Jedi" [level=3, ref=e93]
+        - StaticText "RISE OF THE FIRST ORDER"
+        - StaticText "sequel"
+        - StaticText "luke"
+        - StaticText "rey"
+        - StaticText "snoke"
+        - paragraph
+      - generic [ref=e73] clickable [cursor:pointer, onclick]
+        - StaticText "MOVIE"
+        - StaticText "2019"
+        - heading "Episode IX: The Rise of Skywalker" [level=3, ref=e94]
+        - StaticText "RISE OF THE FIRST ORDER"
+        - StaticText "sequel"
+        - StaticText "palpatine-return"
+        - StaticText "rey-palpatine"
+        - StaticText "ben-solo"
+        - paragraph
+          - StaticText "Emperor Palpatine has returned from beyond death with a massive fleet — the Final Order. Rey discovers her heritage: she is a Palpatine, but chooses the path of the Jedi. Kylo Ren is redeemed by the memory of his father and returns as Ben Solo. In an epic final battle above Exegol, the citizens' fleet arrives. Rey confronts Palpatine, channeling the power of all the Jedi who came before her. The Emperor is destroyed. Ben Solo sacrifices himself to save Rey. The Skywalker saga ends with Rey taking the Skywalker name on Tatooine."
+      - generic
+      - generic [ref=e74] clickable [cursor:pointer, onclick]
+        - image "Episode IX: The Rise of Skywalker poster"
+  - generic
+    - heading "SUPPLEMENTARY & EXPANDED TITLES" [level=2, ref=e13]
+    - paragraph
+    - generic
+      - heading "The Acolyte" [level=3, ref=e30]
+    - generic
+      - heading "Star Wars: The Clone Wars (Movie)" [level=3, ref=e31]
+    - generic
+      - heading "Tales of the Jedi" [level=3, ref=e32]
+    - generic
+      - heading "Tales of the Empire" [level=3, ref=e33]
+    - generic
+      - heading "Tales of the Underworld" [level=3, ref=e34]
+    - generic
+      - heading "Skeleton Crew" [level=3, ref=e35]
+    - generic
+      - heading "Star Wars Resistance" [level=3, ref=e36]
+- generic
+  - generic
+    - heading "FALL OF THE JEDI" [level=2, ref=e25]
+    - paragraph
+  - generic
+    - generic [ref=e37] clickable [cursor:pointer, onclick]
+      - heading "Episode I: The Phantom Menace" [level=3, ref=e76]
+      - heading "WHY WATCH IT HERE" [level=4, ref=e95]
+      - heading "BEGINNER-FRIENDLY SUMMARY" [level=4, ref=e96]
+      - heading "CONTINUITY NOTE" [level=4, ref=e97]
+    - generic
+    - generic [ref=e38] clickable [cursor:pointer, onclick]
+      - image "Episode I: The Phantom Menace poster"
+    - generic [ref=e39] clickable [cursor:pointer, onclick]
+      - image "Episode II: Attack of the Clones poster"
+    - generic
+    - generic [ref=e40] clickable [cursor:pointer, onclick]
+      - heading "Episode II: Attack of the Clones" [level=3, ref=e77]
+    - generic [ref=e41] clickable [cursor:pointer, onclick]
+      - heading "Star Wars: The Clone Wars" [level=3, ref=e78]
+    - generic
+    - generic [ref=e42] clickable [cursor:pointer, onclick]
+      - image "Star Wars: The Clone Wars poster"
+    - generic [ref=e43] clickable [cursor:pointer, onclick]
+      - image "Episode III: Revenge of the Sith poster"
+    - generic
+    - generic [ref=e44] clickable [cursor:pointer, onclick]
+      - heading "Episode III: Revenge of the Sith" [level=3, ref=e79]
+- generic
+  - generic
+    - heading "REIGN OF THE EMPIRE" [level=2, ref=e26]
+    - paragraph
+  - generic
+    - generic [ref=e45] clickable [cursor:pointer, onclick]
+      - heading "The Bad Batch" [level=3, ref=e80]
+    - generic
+    - generic [ref=e46] clickable [cursor:pointer, onclick]
+    - generic [ref=e47] clickable [cursor:pointer, onclick]
+      - image "Solo: A Star Wars Story poster"
+    - generic
+    - generic [ref=e48] clickable [cursor:pointer, onclick]
+      - heading "Solo: A Star Wars Story" [level=3, ref=e81]
+    - generic [ref=e49] clickable [cursor:pointer, onclick]
+      - heading "Obi-Wan Kenobi" [level=3, ref=e82]
+    - generic [ref=e50] clickable [cursor:pointer, onclick]
+- generic
+  - generic
+    - heading "AGE OF REBELLION" [level=2, ref=e27]
+    - paragraph
+      - StaticText "The spark of hope that ignites the Rebel Alliance and topples the Empire"
+  - generic
+    - generic [ref=e51] clickable [cursor:pointer, onclick]
+      - image "Star Wars Rebels poster"
+    - generic
+    - generic [ref=e52] clickable [cursor:pointer, onclick]
+      - StaticText "ANIMATED TV SERIES"
+      - StaticText "2014–2018"
+      - heading "Star Wars Rebels" [level=3, ref=e83]
+      - StaticText "AGE OF REBELLION"
+      - StaticText "animated"
+      - StaticText "rebellion"
+      - StaticText "ahsoka"
+      - StaticText "thrawn"
+      - paragraph
+    - generic
+      - paragraph
+      - generic [ref=e53] clickable [cursor:pointer, onclick]
+        - heading "Andor" [level=3, ref=e84]
+      - generic [ref=e54] clickable [cursor:pointer, onclick]
+    - generic [ref=e55] clickable [cursor:pointer, onclick]
+      - image "Rogue One: A Star Wars Story poster"
+    - generic
+    - generic [ref=e56] clickable [cursor:pointer, onclick]
+      - heading "Rogue One: A Star Wars Story" [level=3, ref=e85]
+    - generic [ref=e57] clickable [cursor:pointer, onclick]
+      - heading "Episode IV: A New Hope" [level=3, ref=e86]
+    - generic
+    - generic [ref=e58] clickable [cursor:pointer, onclick]
+      - image "Episode IV: A New Hope poster"
+    - generic [ref=e59] clickable [cursor:pointer, onclick]
+      - image "Episode V: The Empire Strikes Back poster"
+    - generic
+    - generic [ref=e60] clickable [cursor:pointer, onclick]
+      - heading "Episode V: The Empire Strikes Back" [level=3, ref=e87]
+    - generic [ref=e61] clickable [cursor:pointer, onclick]
+      - heading "Episode VI: Return of the Jedi" [level=3, ref=e88]
+    - generic
+    - generic [ref=e62] clickable [cursor:pointer, onclick]
+      - image "Episode VI: Return of the Jedi poster"
+- generic
+  - generic
+    - heading "THE NEW REPUBLIC" [level=2, ref=e28]
+    - paragraph
+      - StaticText "A fragile new era of peace, scattered threats, and the way of the Mandalorian"
+  - generic
+    - generic [ref=e63] clickable [cursor:pointer, onclick]
+      - image "The Mandalorian poster"
+    - generic
+    - generic [ref=e64] clickable [cursor:pointer, onclick]
+      - StaticText "TV SERIES"
+      - StaticText "2019–present"
+      - heading "The Mandalorian" [level=3, ref=e89]
+      - StaticText "THE NEW REPUBLIC"
+      - StaticText "mandalorian"
+      - StaticText "grogu"
+      - StaticText "boba"
+      - StaticText "new-republic"
+      - paragraph
+        - StaticText "In the lawless aftermath of the Empire's fall, a lone Mandalorian bounty hunter known as Din Djarin discovers an unexpected prize: a Force-sensitive child of the same mysterious species as Yoda. Protecting this child — Grogu — takes Din on a journey across the galaxy's outer rim, forging unlikely alliances, confronting Imperial remnants, and discovering what it means to be more than a warrior."
+    - generic [ref=e65] clickable [cursor:pointer, onclick]
+      - heading "The Book of Boba Fett" [level=3, ref=e90]
+    - generic
+    - generic [ref=e66] clickable [cursor:pointer, onclick]
+    - generic [ref=e67] clickable [cursor:pointer, onclick]
+    - generic
+    - generic [ref=e68] clickable [cursor:pointer, onclick]
+      - heading "Ahsoka" [level=3, ref=e91]
+- generic
+  - generic
+    - heading "RISE OF THE FIRST ORDER" [level=2, ref=e29]
+    - paragraph
+      - StaticText "The Empire's ghost returns as the First Order, and the last Jedi must rise again"
+  - generic
+    - generic [ref=e69] clickable [cursor:pointer, onclick]
+      - StaticText "MOVIE"
+      - StaticText "2015"
+      - heading "Episode VII: The Force Awakens" [level=3, ref=e92]
+      - StaticText "RISE OF THE FIRST ORDER"
+      - StaticText "sequel"
+      - StaticText "rey"
+      - StaticText "kylo"
+      - StaticText "first-order"
+      - paragraph
+    - generic
+    - generic [ref=e70] clickable [cursor:pointer, onclick]
+      - image "Episode VII: The Force Awakens poster"
+    - generic [ref=e71] clickable [cursor:pointer, onclick]
+      - image "Episode VIII: The Last Jedi poster"
+    - generic
+    - generic [ref=e72] clickable [cursor:pointer, onclick]
+      - StaticText "MOVIE"
+      - StaticText "2017"
+      - heading "Episode VIII: The Last Jedi" [level=3, ref=e93]
+      - StaticText "RISE OF THE FIRST ORDER"
+      - StaticText "sequel"
+      - StaticText "luke"
+      - StaticText "rey"
+      - StaticText "snoke"
+      - paragraph
+    - generic [ref=e73] clickable [cursor:pointer, onclick]
+      - StaticText "MOVIE"
+      - StaticText "2019"
+      - heading "Episode IX: The Rise of Skywalker" [level=3, ref=e94]
+      - StaticText "RISE OF THE FIRST ORDER"
+      - StaticText "sequel"
+      - StaticText "palpatine-return"
+      - StaticText "rey-palpatine"
+      - StaticText "ben-solo"
+      - paragraph
+        - StaticText "Emperor Palpatine has returned from beyond death with a massive fleet — the Final Order. Rey discovers her heritage: she is a Palpatine, but chooses the path of the Jedi. Kylo Ren is redeemed by the memory of his father and returns as Ben Solo. In an epic final battle above Exegol, the citizens' fleet arrives. Rey confronts Palpatine, channeling the power of all the Jedi who came before her. The Emperor is destroyed. Ben Solo sacrifices himself to save Rey. The Skywalker saga ends with Rey taking the Skywalker name on Tatooine."
+    - generic
+    - generic [ref=e74] clickable [cursor:pointer, onclick]
+      - image "Episode IX: The Rise of Skywalker poster"
+- generic
+  - heading "SUPPLEMENTARY & EXPANDED TITLES" [level=2, ref=e13]
+  - paragraph
+  - generic
+    - heading "The Acolyte" [level=3, ref=e30]
+  - generic
+    - heading "Star Wars: The Clone Wars (Movie)" [level=3, ref=e31]
+  - generic
+    - heading "Tales of the Jedi" [level=3, ref=e32]
+  - generic
+    - heading "Tales of the Empire" [level=3, ref=e33]
+  - generic
+    - heading "Tales of the Underworld" [level=3, ref=e34]
+  - generic
+    - heading "Skeleton Crew" [level=3, ref=e35]
+  - generic
+    - heading "Star Wars Resistance" [level=3, ref=e36]
+- textbox "Search timeline entries" [ref=e18]
+- button "Enable beginner mode" [ref=e12]
+- heading "SUPPLEMENTARY & EXPANDED TITLES" [level=2, ref=e13]
+- generic
+  - heading "The Acolyte" [level=3, ref=e30]
+- generic
+  - heading "Star Wars: The Clone Wars (Movie)" [level=3, ref=e31]
+- generic
+  - heading "Tales of the Jedi" [level=3, ref=e32]
+- generic
+  - heading "Tales of the Empire" [level=3, ref=e33]
+- generic
+  - heading "Tales of the Underworld" [level=3, ref=e34]
+- generic
+  - heading "Skeleton Crew" [level=3, ref=e35]
+- generic
+  - heading "Star Wars Resistance" [level=3, ref=e36]
+- button "Sort by chronological story order" [ref=e15]
+- button "Sort by theatrical release order" [ref=e16]
+- heading "New to Star Wars?" [level=3, ref=e17]
+- heading "FALL OF THE JEDI" [level=2, ref=e25]
+- generic [ref=e37] clickable [cursor:pointer, onclick]
+  - heading "Episode I: The Phantom Menace" [level=3, ref=e76]
+  - heading "WHY WATCH IT HERE" [level=4, ref=e95]
+  - heading "BEGINNER-FRIENDLY SUMMARY" [level=4, ref=e96]
+  - heading "CONTINUITY NOTE" [level=4, ref=e97]
+- generic [ref=e38] clickable [cursor:pointer, onclick]
+  - image "Episode I: The Phantom Menace poster"
+- generic [ref=e39] clickable [cursor:pointer, onclick]
+  - image "Episode II: Attack of the Clones poster"
+- generic [ref=e40] clickable [cursor:pointer, onclick]
+  - heading "Episode II: Attack of the Clones" [level=3, ref=e77]
+- generic [ref=e41] clickable [cursor:pointer, onclick]
+  - heading "Star Wars: The Clone Wars" [level=3, ref=e78]
+- generic [ref=e42] clickable [cursor:pointer, onclick]
+  - image "Star Wars: The Clone Wars poster"
+- generic [ref=e43] clickable [cursor:pointer, onclick]
+  - image "Episode III: Revenge of the Sith poster"
+- generic [ref=e44] clickable [cursor:pointer, onclick]
+  - heading "Episode III: Revenge of the Sith" [level=3, ref=e79]
+- heading "REIGN OF THE EMPIRE" [level=2, ref=e26]
+- generic [ref=e45] clickable [cursor:pointer, onclick]
+  - heading "The Bad Batch" [level=3, ref=e80]
+- generic [ref=e46] clickable [cursor:pointer, onclick]
+- generic [ref=e47] clickable [cursor:pointer, onclick]
+  - image "Solo: A Star Wars Story poster"
+- generic [ref=e48] clickable [cursor:pointer, onclick]
+  - heading "Solo: A Star Wars Story" [level=3, ref=e81]
+- generic [ref=e49] clickable [cursor:pointer, onclick]
+  - heading "Obi-Wan Kenobi" [level=3, ref=e82]
+- generic [ref=e50] clickable [cursor:pointer, onclick]
+- heading "AGE OF REBELLION" [level=2, ref=e27]
+- generic [ref=e51] clickable [cursor:pointer, onclick]
+- generic [ref=e52] clickable [cursor:pointer, onclick]
+  - heading "Star Wars Rebels" [level=3, ref=e83]
+- generic
+  - paragraph
+  - generic [ref=e53] clickable [cursor:pointer, onclick]
+    - heading "Andor" [level=3, ref=e84]
+  - generic [ref=e54] clickable [cursor:pointer, onclick]
+- generic [ref=e55] clickable [cursor:pointer, onclick]
+  - image "Rogue One: A Star Wars Story poster"
+- generic [ref=e56] clickable [cursor:pointer, onclick]
+  - heading "Rogue One: A Star Wars Story" [level=3, ref=e85]
+- generic [ref=e57] clickable [cursor:pointer, onclick]
+  - heading "Episode IV: A New Hope" [level=3, ref=e86]
+- generic [ref=e58] clickable [cursor:pointer, onclick]
+  - image "Episode IV: A New Hope poster"
+- generic [ref=e59] clickable [cursor:pointer, onclick]
+  - image "Episode V: The Empire Strikes Back poster"
+- generic [ref=e60] clickable [cursor:pointer, onclick]
+  - heading "Episode V: The Empire Strikes Back" [level=3, ref=e87]
+- generic [ref=e61] clickable [cursor:pointer, onclick]
+  - heading "Episode VI: Return of the Jedi" [level=3, ref=e88]
+- generic [ref=e62] clickable [cursor:pointer, onclick]
+  - image "Episode VI: Return of the Jedi poster"
+- heading "THE NEW REPUBLIC" [level=2, ref=e28]
+- generic [ref=e63] clickable [cursor:pointer, onclick]
+- generic [ref=e64] clickable [cursor:pointer, onclick]
+  - StaticText "TV SERIES"
+  - StaticText "2019–present"
+  - heading "The Mandalorian" [level=3, ref=e89]
+  - StaticText "THE NEW REPUBLIC"
+  - StaticText "mandalorian"
+  - StaticText "grogu"
+  - StaticText "boba"
+  - StaticText "new-republic"
+  - paragraph
+    - StaticText "In the lawless aftermath of the Empire's fall, a lone Mandalorian bounty hunter known as Din Djarin discovers an unexpected prize: a Force-sensitive child of the same mysterious species as Yoda. Protecting this child — Grogu — takes Din on a journey across the galaxy's outer rim, forging unlikely alliances, confronting Imperial remnants, and discovering what it means to be more than a warrior."
+- generic [ref=e65] clickable [cursor:pointer, onclick]
+  - heading "The Book of Boba Fett" [level=3, ref=e90]
+- generic [ref=e66] clickable [cursor:pointer, onclick]
+- generic [ref=e67] clickable [cursor:pointer, onclick]
+- generic [ref=e68] clickable [cursor:pointer, onclick]
+  - heading "Ahsoka" [level=3, ref=e91]
+- heading "RISE OF THE FIRST ORDER" [level=2, ref=e29]
+- generic [ref=e69] clickable [cursor:pointer, onclick]
+  - heading "Episode VII: The Force Awakens" [level=3, ref=e92]
+- generic [ref=e70] clickable [cursor:pointer, onclick]
+  - image "Episode VII: The Force Awakens poster"
+- generic [ref=e71] clickable [cursor:pointer, onclick]
+  - image "Episode VIII: The Last Jedi poster"
+- generic [ref=e72] clickable [cursor:pointer, onclick]
+  - heading "Episode VIII: The Last Jedi" [level=3, ref=e93]
+- generic [ref=e73] clickable [cursor:pointer, onclick]
+  - StaticText "MOVIE"
+  - StaticText "2019"
+  - heading "Episode IX: The Rise of Skywalker" [level=3, ref=e94]
+  - StaticText "RISE OF THE FIRST ORDER"
+  - StaticText "sequel"
+  - StaticText "palpatine-return"
+  - StaticText "rey-palpatine"
+  - StaticText "ben-solo"
+  - paragraph
+    - StaticText "Emperor Palpatine has returned from beyond death with a massive fleet — the Final Order. Rey discovers her heritage: she is a Palpatine, but chooses the path of the Jedi. Kylo Ren is redeemed by the memory of his father and returns as Ben Solo. In an epic final battle above Exegol, the citizens' fleet arrives. Rey confronts Palpatine, channeling the power of all the Jedi who came before her. The Emperor is destroyed. Ben Solo sacrifices himself to save Rey. The Skywalker saga ends with Rey taking the Skywalker name on Tatooine."
+- generic [ref=e74] clickable [cursor:pointer, onclick]
+  - image "Episode IX: The Rise of Skywalker poster"
+- generic [ref=e37] clickable [cursor:pointer, onclick]
+  - heading "Episode I: The Phantom Menace" [level=3, ref=e76]
+  - heading "WHY WATCH IT HERE" [level=4, ref=e95]
+  - heading "BEGINNER-FRIENDLY SUMMARY" [level=4, ref=e96]
+  - heading "CONTINUITY NOTE" [level=4, ref=e97]
+- generic [ref=e38] clickable [cursor:pointer, onclick]
+  - image "Episode I: The Phantom Menace poster"
+- generic [ref=e39] clickable [cursor:pointer, onclick]
+  - image "Episode II: Attack of the Clones poster"
+- generic [ref=e40] clickable [cursor:pointer, onclick]
+  - heading "Episode II: Attack of the Clones" [level=3, ref=e77]
+- generic [ref=e41] clickable [cursor:pointer, onclick]
+  - heading "Star Wars: The Clone Wars" [level=3, ref=e78]
+- generic [ref=e42] clickable [cursor:pointer, onclick]
+  - image "Star Wars: The Clone Wars poster"
+- generic [ref=e43] clickable [cursor:pointer, onclick]
+  - image "Episode III: Revenge of the Sith poster"
+- generic [ref=e44] clickable [cursor:pointer, onclick]
+  - heading "Episode III: Revenge of the Sith" [level=3, ref=e79]
+- generic [ref=e45] clickable [cursor:pointer, onclick]
+  - heading "The Bad Batch" [level=3, ref=e80]
+- generic [ref=e46] clickable [cursor:pointer, onclick]
+- generic [ref=e47] clickable [cursor:pointer, onclick]
+  - image "Solo: A Star Wars Story poster"
+- generic [ref=e48] clickable [cursor:pointer, onclick]
+  - heading "Solo: A Star Wars Story" [level=3, ref=e81]
+- generic [ref=e49] clickable [cursor:pointer, onclick]
+  - heading "Obi-Wan Kenobi" [level=3, ref=e82]
+- generic [ref=e50] clickable [cursor:pointer, onclick]
+- generic [ref=e51] clickable [cursor:pointer, onclick]
+- generic [ref=e52] clickable [cursor:pointer, onclick]
+  - heading "Star Wars Rebels" [level=3, ref=e83]
+- generic [ref=e53] clickable [cursor:pointer, onclick]
+  - heading "Andor" [level=3, ref=e84]
+- generic [ref=e54] clickable [cursor:pointer, onclick]
+- generic [ref=e55] clickable [cursor:pointer, onclick]
+  - image "Rogue One: A Star Wars Story poster"
+- generic [ref=e56] clickable [cursor:pointer, onclick]
+  - heading "Rogue One: A Star Wars Story" [level=3, ref=e85]
+- generic [ref=e57] clickable [cursor:pointer, onclick]
+  - heading "Episode IV: A New Hope" [level=3, ref=e86]
+- generic [ref=e58] clickable [cursor:pointer, onclick]
+  - image "Episode IV: A New Hope poster"
+- generic [ref=e59] clickable [cursor:pointer, onclick]
+  - image "Episode V: The Empire Strikes Back poster"
+- generic [ref=e60] clickable [cursor:pointer, onclick]
+  - heading "Episode V: The Empire Strikes Back" [level=3, ref=e87]
+- generic [ref=e61] clickable [cursor:pointer, onclick]
+  - heading "Episode VI: Return of the Jedi" [level=3, ref=e88]
+- generic [ref=e62] clickable [cursor:pointer, onclick]
+  - image "Episode VI: Return of the Jedi poster"
+- generic [ref=e63] clickable [cursor:pointer, onclick]
+- generic [ref=e64] clickable [cursor:pointer, onclick]
+  - StaticText "TV SERIES"
+  - StaticText "2019–present"
+  - heading "The Mandalorian" [level=3, ref=e89]
+  - StaticText "THE NEW REPUBLIC"
+  - StaticText "mandalorian"
+  - StaticText "grogu"
+  - StaticText "boba"
+  - StaticText "new-republic"
+  - paragraph
+    - StaticText "In the lawless aftermath of the Empire's fall, a lone Mandalorian bounty hunter known as Din Djarin discovers an unexpected prize: a Force-sensitive child of the same mysterious species as Yoda. Protecting this child — Grogu — takes Din on a journey across the galaxy's outer rim, forging unlikely alliances, confronting Imperial remnants, and discovering what it means to be more than a warrior."
+- generic [ref=e65] clickable [cursor:pointer, onclick]
+  - heading "The Book of Boba Fett" [level=3, ref=e90]
+- generic [ref=e66] clickable [cursor:pointer, onclick]
+- generic [ref=e67] clickable [cursor:pointer, onclick]
+- generic [ref=e68] clickable [cursor:pointer, onclick]
+  - heading "Ahsoka" [level=3, ref=e91]
+- generic [ref=e69] clickable [cursor:pointer, onclick]
+  - heading "Episode VII: The Force Awakens" [level=3, ref=e92]
+- generic [ref=e70] clickable [cursor:pointer, onclick]
+  - image "Episode VII: The Force Awakens poster"
+- generic [ref=e71] clickable [cursor:pointer, onclick]
+  - image "Episode VIII: The Last Jedi poster"
+- generic [ref=e72] clickable [cursor:pointer, onclick]
+  - heading "Episode VIII: The Last Jedi" [level=3, ref=e93]
+- generic [ref=e73] clickable [cursor:pointer, onclick]
+  - StaticText "MOVIE"
+  - StaticText "2019"
+  - heading "Episode IX: The Rise of Skywalker" [level=3, ref=e94]
+  - StaticText "RISE OF THE FIRST ORDER"
+  - StaticText "sequel"
+  - StaticText "palpatine-return"
+  - StaticText "rey-palpatine"
+  - StaticText "ben-solo"
+  - paragraph
+    - StaticText "Emperor Palpatine has returned from beyond death with a massive fleet — the Final Order. Rey discovers her heritage: she is a Palpatine, but chooses the path of the Jedi. Kylo Ren is redeemed by the memory of his father and returns as Ben Solo. In an epic final battle above Exegol, the citizens' fleet arrives. Rey confronts Palpatine, channeling the power of all the Jedi who came before her. The Emperor is destroyed. Ben Solo sacrifices himself to save Rey. The Skywalker saga ends with Rey taking the Skywalker name on Tatooine."
+- generic [ref=e74] clickable [cursor:pointer, onclick]
+  - image "Episode IX: The Rise of Skywalker poster"
+- heading "Episode I: The Phantom Menace" [level=3, ref=e76]
+- heading "Episode II: Attack of the Clones" [level=3, ref=e77]
+- heading "Star Wars: The Clone Wars" [level=3, ref=e78]
+- heading "Episode III: Revenge of the Sith" [level=3, ref=e79]
+- heading "The Bad Batch" [level=3, ref=e80]
+- heading "Solo: A Star Wars Story" [level=3, ref=e81]
+- heading "Obi-Wan Kenobi" [level=3, ref=e82]
+- heading "Star Wars Rebels" [level=3, ref=e83]
+- heading "Andor" [level=3, ref=e84]
+- heading "Rogue One: A Star Wars Story" [level=3, ref=e85]
+- heading "Episode IV: A New Hope" [level=3, ref=e86]
+- heading "Episode V: The Empire Strikes Back" [level=3, ref=e87]
+- heading "Episode VI: Return of the Jedi" [level=3, ref=e88]
+- heading "The Mandalorian" [level=3, ref=e89]
+- paragraph
+  - StaticText "In the lawless aftermath of the Empire's fall, a lone Mandalorian bounty hunter known as Din Djarin discovers an unexpected prize: a Force-sensitive child of the same mysterious species as Yoda. Protecting this child — Grogu — takes Din on a journey across the galaxy's outer rim, forging unlikely alliances, confronting Imperial remnants, and discovering what it means to be more than a warrior."
+- heading "The Book of Boba Fett" [level=3, ref=e90]
+- heading "Ahsoka" [level=3, ref=e91]
+- heading "Episode VII: The Force Awakens" [level=3, ref=e92]
+- heading "Episode VIII: The Last Jedi" [level=3, ref=e93]
+- heading "Episode IX: The Rise of Skywalker" [level=3, ref=e94]
+- paragraph
+  - StaticText "Emperor Palpatine has returned from beyond death with a massive fleet — the Final Order. Rey discovers her heritage: she is a Palpatine, but chooses the path of the Jedi. Kylo Ren is redeemed by the memory of his father and returns as Ben Solo. In an epic final battle above Exegol, the citizens' fleet arrives. Rey confronts Palpatine, channeling the power of all the Jedi who came before her. The Emperor is destroyed. Ben Solo sacrifices himself to save Rey. The Skywalker saga ends with Rey taking the Skywalker name on Tatooine."
+- heading "WHY WATCH IT HERE" [level=4, ref=e95]
+- heading "BEGINNER-FRIENDLY SUMMARY" [level=4, ref=e96]
+- heading "CONTINUITY NOTE" [level=4, ref=e97]
