@@ -33,18 +33,11 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
   const starsFrameRef = useRef<number>(0);
   const crawlFrameRef = useRef<number>(0);
   const crawlStartedRef = useRef({ started: false, elapsed: 0, lastTime: 0 });
-  const speedBoostRef = useRef(1);
-
-  // Hyperspace acceleration when the crawl begins
-  useEffect(() => {
-    if (phase === 'crawl') speedBoostRef.current = STARFIELD_CONFIG.BOOST_START;
-  }, [phase]);
 
   const skip = useCallback(() => {
     cancelAnimationFrame(starsFrameRef.current);
     cancelAnimationFrame(crawlFrameRef.current);
     crawlStartedRef.current = { started: false, elapsed: 0, lastTime: 0 };
-    speedBoostRef.current = 1;
     setPhase('done');
     onComplete();
   }, [onComplete]);
@@ -131,9 +124,8 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
       // Draw center glow
       drawCenterGlow(ctx, cx, cy);
 
-      // Update star positions (with hyperspace boost that decays back to 1)
-      updateStars(stars, STAR_COUNT, cosTable, sinTable, speedBoostRef.current * dt);
-      speedBoostRef.current += (1 - speedBoostRef.current) * STARFIELD_CONFIG.BOOST_DECAY * dt;
+      // Update star positions (constant uniform speed)
+      updateStars(stars, STAR_COUNT, cosTable, sinTable, dt);
 
       starsFrameRef.current = requestAnimationFrame(draw);
     };
@@ -147,21 +139,17 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
     };
   }, [phase]);
 
-  // Crawl animation (with cinematic camera tilt: 45° → 25° over the first seconds)
+  // Crawl animation (constant tilt angle)
   useEffect(() => {
     if (phase !== 'crawl' && phase !== 'fade-out') return;
 
     const el = crawlRef.current;
     if (!el) return;
 
-    const TILT_START_DEG = 45;
-    const TILT_DURATION = 1.5;
-
     if (!crawlStartedRef.current.started) {
       crawlStartedRef.current.started = true;
       crawlStartedRef.current.elapsed = 0;
       crawlStartedRef.current.lastTime = performance.now();
-      el.style.transform = `rotateX(${TILT_START_DEG}deg) translateY(${window.innerHeight * CRAWL_CONFIG.START_Y_RATIO}px)`;
     }
 
     let running = true;
@@ -175,13 +163,8 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
       crawlStartedRef.current.elapsed += dt;
 
       const startY = window.innerHeight * CRAWL_CONFIG.START_Y_RATIO - speed * crawlStartedRef.current.elapsed;
-      const elapsed = crawlStartedRef.current.elapsed;
 
-      const tiltProgress = Math.min(elapsed / TILT_DURATION, 1);
-      const eased = 1 - Math.pow(1 - tiltProgress, 3);
-      const angle = TILT_START_DEG + (CRAWL_CONFIG.ROTATE_X - TILT_START_DEG) * eased;
-
-      el.style.transform = `rotateX(${angle}deg) translateY(${startY}px)`;
+      el.style.transform = `rotateX(${CRAWL_CONFIG.ROTATE_X}deg) translateY(${startY}px)`;
 
       crawlFrameRef.current = requestAnimationFrame(animate);
     };
@@ -280,7 +263,7 @@ function CrawlPhase({ crawlRef }: { crawlRef: React.RefObject<HTMLDivElement | n
           ref={crawlRef}
           className="w-full mx-auto px-8 md:px-16 lg:px-24 will-change-transform"
           style={{
-            transform: `rotateX(45deg) translateY(${CRAWL_CONFIG.START_Y_RATIO * 100}vh)`,
+            transform: `rotateX(${CRAWL_CONFIG.ROTATE_X}deg) translateY(${CRAWL_CONFIG.START_Y_RATIO * 100}vh)`,
             transformOrigin: '50% 100%',
           }}
         >
@@ -390,10 +373,10 @@ function drawCenterGlow(ctx: CanvasRenderingContext2D, cx: number, cy: number) {
   ctx.fill();
 }
 
-function updateStars(stars: Float64Array, starCount: number, cosTable: Float64Array, sinTable: Float64Array, boost: number) {
+function updateStars(stars: Float64Array, starCount: number, cosTable: Float64Array, sinTable: Float64Array, dt: number) {
   for (let i = 0; i < starCount; i++) {
     const base = i * 5;
-    stars[base + 1] += stars[base + 2] * STARFIELD_CONFIG.SPEED_MULTIPLIER * boost;
+    stars[base + 1] += stars[base + 2] * STARFIELD_CONFIG.SPEED_MULTIPLIER * dt;
 
     if (stars[base + 1] > stars[base + 4]) {
       stars[base + 1] = Math.random() * 3 + 0.5;

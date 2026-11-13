@@ -56,9 +56,6 @@ export const STARFIELD_CONFIG = {
   BAND_STREAK_RATIO: 0.2,
   BAND_STREAK_MAX: 80,
   BRIGHT_STREAK_RATIO: 0.28,
-  /* Hyperspace boost when the crawl begins */
-  BOOST_START: 3.2,
-  BOOST_DECAY: 0.02,
 } as const;
 
 /* ─── Crawl Config ─── */
