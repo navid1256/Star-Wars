@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description: "A curated journey through the main Star Wars movies and major series — from the fall of the Republic to the rise of the Empire, the Rebellion, the New Republic, and the final conflict with the First Order.",
   keywords: ["Star Wars", "Chronological", "Viewing Order", "Timeline", "Jedi", "Sith", "Galactic Empire", "Rebellion"],
   icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+    icon: "/logo.png",
   },
 };
 
