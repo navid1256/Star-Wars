@@ -75,4 +75,4 @@ Caddyfile
 /db/
 
 # Download
-/download/
+/download/tool-results/
