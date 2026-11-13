@@ -37,7 +37,7 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
 
   // Hyperspace acceleration when the crawl begins
   useEffect(() => {
-    if (phase === 'crawl') speedBoostRef.current = 2.6;
+    if (phase === 'crawl') speedBoostRef.current = STARFIELD_CONFIG.BOOST_START;
   }, [phase]);
 
   const skip = useCallback(() => {
@@ -94,7 +94,7 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
       const base = i * 5;
       stars[base] = Math.random() * Math.PI * 2;
       stars[base + 1] = Math.random() * maxR;
-      stars[base + 2] = Math.random() * 1.8 + 0.8;
+      stars[base + 2] = Math.random() * 2.4 + 1.0;
       stars[base + 3] = Math.random() * 0.5 + 0.3;
       stars[base + 4] = maxR;
     }
@@ -106,8 +106,14 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
       sinTable[i] = Math.sin(stars[i * 5]);
     }
 
-    const draw = () => {
+    let lastFrame = performance.now();
+
+    const draw = (now: number) => {
       if (!running) return;
+
+      // Normalize to 60fps so speed is identical on 60/120/144Hz displays
+      const dt = Math.min((now - lastFrame) / 16.667, 3);
+      lastFrame = now;
 
       const w = W();
       const h = H();
@@ -126,8 +132,8 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
       drawCenterGlow(ctx, cx, cy);
 
       // Update star positions (with hyperspace boost that decays back to 1)
-      updateStars(stars, STAR_COUNT, cosTable, sinTable, speedBoostRef.current);
-      speedBoostRef.current += (1 - speedBoostRef.current) * 0.015;
+      updateStars(stars, STAR_COUNT, cosTable, sinTable, speedBoostRef.current * dt);
+      speedBoostRef.current += (1 - speedBoostRef.current) * STARFIELD_CONFIG.BOOST_DECAY * dt;
 
       starsFrameRef.current = requestAnimationFrame(draw);
     };
@@ -330,7 +336,7 @@ function drawStarBands(
       const sin = sinTable[i];
       const x1 = cx + cos * dist;
       const y1 = cy + sin * dist;
-      const streakLen = Math.min(dist * 0.12, 50);
+      const streakLen = Math.min(dist * STARFIELD_CONFIG.BAND_STREAK_RATIO, STARFIELD_CONFIG.BAND_STREAK_MAX);
 
       ctx.moveTo(x1, y1);
       ctx.lineTo(cx + cos * (dist + streakLen), cy + sin * (dist + streakLen));
@@ -365,7 +371,7 @@ function drawBrightStars(
 
     const cos = cosTable[i];
     const sin = sinTable[i];
-    const streakLen = Math.min(dist * 0.18, maxStreak);
+    const streakLen = Math.min(dist * STARFIELD_CONFIG.BRIGHT_STREAK_RATIO, maxStreak);
 
     ctx.moveTo(cx + cos * dist, cy + sin * dist);
     ctx.lineTo(cx + cos * (dist + streakLen), cy + sin * (dist + streakLen));
@@ -387,12 +393,12 @@ function drawCenterGlow(ctx: CanvasRenderingContext2D, cx: number, cy: number) {
 function updateStars(stars: Float64Array, starCount: number, cosTable: Float64Array, sinTable: Float64Array, boost: number) {
   for (let i = 0; i < starCount; i++) {
     const base = i * 5;
-    stars[base + 1] += stars[base + 2] * 1.6 * boost;
+    stars[base + 1] += stars[base + 2] * STARFIELD_CONFIG.SPEED_MULTIPLIER * boost;
 
     if (stars[base + 1] > stars[base + 4]) {
       stars[base + 1] = Math.random() * 3 + 0.5;
       stars[base] = Math.random() * Math.PI * 2;
-      stars[base + 2] = Math.random() * 1.8 + 0.8;
+      stars[base + 2] = Math.random() * 2.4 + 1.0;
       stars[base + 3] = Math.random() * 0.5 + 0.3;
       cosTable[i] = Math.cos(stars[base]);
       sinTable[i] = Math.sin(stars[base]);

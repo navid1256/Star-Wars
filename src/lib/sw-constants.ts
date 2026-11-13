@@ -47,9 +47,18 @@ export const INTRO_TIMING = {
 
 /* ─── Starfield Config ─── */
 export const STARFIELD_CONFIG = {
-  STAR_COUNT: 600,
-  MAX_STREAK_LENGTH: 70,
-  BRIGHT_STAR_THRESHOLD: 200,
+  STAR_COUNT: 700,
+  MAX_STREAK_LENGTH: 110,
+  BRIGHT_STAR_THRESHOLD: 180,
+  /* Speed of the shooting-star streaks (px per frame at 60fps) */
+  SPEED_MULTIPLIER: 3.0,
+  /* Streak length ratios — longer streaks = stronger sense of speed */
+  BAND_STREAK_RATIO: 0.2,
+  BAND_STREAK_MAX: 80,
+  BRIGHT_STREAK_RATIO: 0.28,
+  /* Hyperspace boost when the crawl begins */
+  BOOST_START: 3.2,
+  BOOST_DECAY: 0.02,
 } as const;
 
 /* ─── Crawl Config ─── */
