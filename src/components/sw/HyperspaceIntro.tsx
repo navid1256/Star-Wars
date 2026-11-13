@@ -33,6 +33,12 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
   const starsFrameRef = useRef<number>(0);
   const crawlFrameRef = useRef<number>(0);
   const crawlStartedRef = useRef(false);
+  const speedBoostRef = useRef(1);
+
+  // Hyperspace acceleration when the crawl begins
+  useEffect(() => {
+    if (phase === 'crawl') speedBoostRef.current = 2.6;
+  }, [phase]);
 
   const skip = useCallback(() => {
     cancelAnimationFrame(starsFrameRef.current);
@@ -118,8 +124,9 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
       // Draw center glow
       drawCenterGlow(ctx, cx, cy);
 
-      // Update star positions
-      updateStars(stars, STAR_COUNT, cosTable, sinTable);
+      // Update star positions (with hyperspace boost that decays back to 1)
+      updateStars(stars, STAR_COUNT, cosTable, sinTable, speedBoostRef.current);
+      speedBoostRef.current += (1 - speedBoostRef.current) * 0.015;
 
       starsFrameRef.current = requestAnimationFrame(draw);
     };
@@ -133,7 +140,7 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
     };
   }, [phase]);
 
-  // Crawl animation
+  // Crawl animation (with cinematic camera tilt: 45° → 25° over the first seconds)
   useEffect(() => {
     if (phase !== 'crawl' && phase !== 'fade-out') return;
     if (crawlStartedRef.current) return;
@@ -142,21 +149,30 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
     const el = crawlRef.current;
     if (!el) return;
 
+    const TILT_START_DEG = 45;
+    const TILT_DURATION = 1.5;
+
     let running = true;
+    let elapsed = 0;
     let startY = window.innerHeight * CRAWL_CONFIG.START_Y_RATIO;
     const speed = CRAWL_CONFIG.SPEED;
     let lastTime = performance.now();
 
-    el.style.transform = `rotateX(${CRAWL_CONFIG.ROTATE_X}deg) translateY(${startY}px)`;
+    el.style.transform = `rotateX(${TILT_START_DEG}deg) translateY(${startY}px)`;
 
     const animate = (now: number) => {
       if (!running || !el) return;
 
       const dt = (now - lastTime) / 1000;
       lastTime = now;
+      elapsed += dt;
       startY -= speed * dt;
 
-      el.style.transform = `rotateX(${CRAWL_CONFIG.ROTATE_X}deg) translateY(${startY}px)`;
+      const tiltProgress = Math.min(elapsed / TILT_DURATION, 1);
+      const eased = 1 - Math.pow(1 - tiltProgress, 3);
+      const angle = TILT_START_DEG + (CRAWL_CONFIG.ROTATE_X - TILT_START_DEG) * eased;
+
+      el.style.transform = `rotateX(${angle}deg) translateY(${startY}px)`;
 
       crawlFrameRef.current = requestAnimationFrame(animate);
     };
@@ -241,8 +257,10 @@ function CrawlPhase({ crawlRef }: { crawlRef: React.RefObject<HTMLDivElement | n
   return (
     <div className="absolute inset-0 z-10 overflow-hidden flex items-start justify-center">
       <div
-        className="absolute bottom-0 left-0 right-0 h-[12%] z-20 pointer-events-none"
-        style={{ background: 'linear-gradient(to top, #000000 0%, transparent 100%)' }}
+        className="absolute bottom-0 left-0 right-0 h-[20%] z-20 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to top, #000000 0%, rgba(0,0,0,0.92) 25%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.15) 80%, transparent 100%)',
+        }}
       />
 
       <div
@@ -253,7 +271,7 @@ function CrawlPhase({ crawlRef }: { crawlRef: React.RefObject<HTMLDivElement | n
           ref={crawlRef}
           className="w-full mx-auto px-8 md:px-16 lg:px-24 will-change-transform"
           style={{
-            transform: `rotateX(${CRAWL_CONFIG.ROTATE_X}deg) translateY(${CRAWL_CONFIG.START_Y_RATIO * 100}vh)`,
+            transform: `rotateX(45deg) translateY(${CRAWL_CONFIG.START_Y_RATIO * 100}vh)`,
             transformOrigin: '50% 100%',
           }}
         >
@@ -363,10 +381,10 @@ function drawCenterGlow(ctx: CanvasRenderingContext2D, cx: number, cy: number) {
   ctx.fill();
 }
 
-function updateStars(stars: Float64Array, starCount: number, cosTable: Float64Array, sinTable: Float64Array) {
+function updateStars(stars: Float64Array, starCount: number, cosTable: Float64Array, sinTable: Float64Array, boost: number) {
   for (let i = 0; i < starCount; i++) {
     const base = i * 5;
-    stars[base + 1] += stars[base + 2] * 1.6;
+    stars[base + 1] += stars[base + 2] * 1.6 * boost;
 
     if (stars[base + 1] > stars[base + 4]) {
       stars[base + 1] = Math.random() * 3 + 0.5;
