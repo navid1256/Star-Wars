@@ -32,7 +32,7 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
   const crawlRef = useRef<HTMLDivElement>(null);
   const starsFrameRef = useRef<number>(0);
   const crawlFrameRef = useRef<number>(0);
-  const crawlStartedRef = useRef(false);
+  const crawlStartedRef = useRef({ started: false, elapsed: 0, lastTime: 0 });
   const speedBoostRef = useRef(1);
 
   // Hyperspace acceleration when the crawl begins
@@ -43,7 +43,8 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
   const skip = useCallback(() => {
     cancelAnimationFrame(starsFrameRef.current);
     cancelAnimationFrame(crawlFrameRef.current);
-    crawlStartedRef.current = false;
+    crawlStartedRef.current = { started: false, elapsed: 0, lastTime: 0 };
+    speedBoostRef.current = 1;
     setPhase('done');
     onComplete();
   }, [onComplete]);
@@ -143,8 +144,6 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
   // Crawl animation (with cinematic camera tilt: 45° → 25° over the first seconds)
   useEffect(() => {
     if (phase !== 'crawl' && phase !== 'fade-out') return;
-    if (crawlStartedRef.current) return;
-    crawlStartedRef.current = true;
 
     const el = crawlRef.current;
     if (!el) return;
@@ -152,21 +151,25 @@ export default function HyperspaceIntro({ onComplete }: HyperspaceIntroProps) {
     const TILT_START_DEG = 45;
     const TILT_DURATION = 1.5;
 
-    let running = true;
-    let elapsed = 0;
-    let startY = window.innerHeight * CRAWL_CONFIG.START_Y_RATIO;
-    const speed = CRAWL_CONFIG.SPEED;
-    let lastTime = performance.now();
+    if (!crawlStartedRef.current.started) {
+      crawlStartedRef.current.started = true;
+      crawlStartedRef.current.elapsed = 0;
+      crawlStartedRef.current.lastTime = performance.now();
+      el.style.transform = `rotateX(${TILT_START_DEG}deg) translateY(${window.innerHeight * CRAWL_CONFIG.START_Y_RATIO}px)`;
+    }
 
-    el.style.transform = `rotateX(${TILT_START_DEG}deg) translateY(${startY}px)`;
+    let running = true;
+    const speed = CRAWL_CONFIG.SPEED;
 
     const animate = (now: number) => {
       if (!running || !el) return;
 
-      const dt = (now - lastTime) / 1000;
-      lastTime = now;
-      elapsed += dt;
-      startY -= speed * dt;
+      const dt = (now - crawlStartedRef.current.lastTime) / 1000;
+      crawlStartedRef.current.lastTime = now;
+      crawlStartedRef.current.elapsed += dt;
+
+      const startY = window.innerHeight * CRAWL_CONFIG.START_Y_RATIO - speed * crawlStartedRef.current.elapsed;
+      const elapsed = crawlStartedRef.current.elapsed;
 
       const tiltProgress = Math.min(elapsed / TILT_DURATION, 1);
       const eased = 1 - Math.pow(1 - tiltProgress, 3);
